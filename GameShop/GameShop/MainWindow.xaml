@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameShop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Game Shop" Height="500" Width="850">
     <Grid>
-
-    </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+   
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
+        <DataGrid Grid.Row="1" x:Name="dataGrid" Grid.Column="1" Grid.ColumnSpan="2" Margin="60,20,60,20" ItemsSource="{Binding Products}"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">
+            <TextBlock Grid.Row="2" VerticalAlignment="Center">Porez(%)</TextBlock>
+            <TextBox Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        </Grid>
 </Window>
