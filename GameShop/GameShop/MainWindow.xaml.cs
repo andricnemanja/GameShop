@@ -20,9 +20,45 @@ namespace GameShop
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<Product> Products { get; set; }
+        private readonly ProductDatabase productDatabase;
         public MainWindow()
         {
+            DataContext = this;
+            productDatabase = new ProductDatabase{ Tax = 20 };
+            LoadProducts(productDatabase);
+            Products = productDatabase.Products;
             InitializeComponent();
+            
+        }
+
+        private void TaxInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                productDatabase.Tax = Convert.ToDouble(TaxInput.Text);
+                dataGrid.Items.Refresh();
+            }
+            catch (Exception)
+            {
+                TaxInput.Text = ".0";
+            }
+        }
+
+        private void LoadProducts(ProductDatabase productDatabase)
+        {
+            productDatabase.AddProduct(new Product
+            {
+                Name = "Fifa 2022",
+                UPC = 1000,
+                Price = 4999.99
+            });
+            productDatabase.AddProduct(new Product
+            {
+                Name = "Pro Evolution Soccer 2022",
+                UPC = 1001,
+                Price = 3999.99
+            });
         }
     }
 }
