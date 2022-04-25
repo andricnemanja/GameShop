@@ -22,6 +22,8 @@ namespace GameShop
     {
         public List<Product> Products { get; set; }
         private readonly ProductDatabase productDatabase;
+        private double tax;
+
         public MainWindow()
         {
             DataContext = this;
@@ -36,7 +38,8 @@ namespace GameShop
         {
             try
             {
-                productDatabase.Tax = Convert.ToDouble(TaxInput.Text);
+                tax = Convert.ToDouble(TaxInput.Text);
+                productDatabase.Tax = tax;
                 dataGrid.Items.Refresh();
             }
             catch (Exception)
@@ -59,6 +62,19 @@ namespace GameShop
                 UPC = 1001,
                 Price = 3999.99
             });
+        }
+
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            AddProductWindow addProductWindow = new AddProductWindow(productDatabase, dataGrid, tax);
+            addProductWindow.Show();
+        }
+
+        private void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        {
+            Product productToRemove = (Product)dataGrid.SelectedItem;
+            productDatabase.Products.Remove(productToRemove);
+            dataGrid.Items.Refresh();
         }
     }
 }

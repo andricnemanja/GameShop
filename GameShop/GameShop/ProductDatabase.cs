@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameShop
 {
-    class ProductDatabase
+    public class ProductDatabase
     {
         public List<Product> Products { get; set; }
         private double _tax;
