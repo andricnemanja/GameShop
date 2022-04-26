@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "Fifa 2022",
+    "UPC": 1000,
+    "Price": 4999.99,
+    "PriceWithTax": 5999.99
+  },
+  {
+    "Name": "Pro Evolution Soccer 2022",
+    "UPC": 1001,
+    "Price": 3999.99,
+    "PriceWithTax": 4799.99
+  }
+]

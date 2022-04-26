@@ -20,6 +20,7 @@ namespace GameShop
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static string PRODUCTS_JSON = @".\..\..\..\Resources\products.json";
         public List<Product> Products { get; set; }
         private readonly ProductDatabase productDatabase;
         private double tax;
@@ -27,8 +28,8 @@ namespace GameShop
         public MainWindow()
         {
             DataContext = this;
-            productDatabase = new ProductDatabase{ Tax = 20 };
-            LoadProducts(productDatabase);
+            productDatabase = new ProductDatabase(PRODUCTS_JSON) { Tax = 20 };
+            productDatabase.Deserialize();
             Products = productDatabase.Products;
             InitializeComponent();
             
@@ -48,22 +49,6 @@ namespace GameShop
             }
         }
 
-        private void LoadProducts(ProductDatabase productDatabase)
-        {
-            productDatabase.AddProduct(new Product
-            {
-                Name = "Fifa 2022",
-                UPC = 1000,
-                Price = 4999.99
-            });
-            productDatabase.AddProduct(new Product
-            {
-                Name = "Pro Evolution Soccer 2022",
-                UPC = 1001,
-                Price = 3999.99
-            });
-        }
-
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
             AddProductWindow addProductWindow = new AddProductWindow(productDatabase, dataGrid, tax);
@@ -75,6 +60,11 @@ namespace GameShop
             Product productToRemove = (Product)dataGrid.SelectedItem;
             productDatabase.Products.Remove(productToRemove);
             dataGrid.Items.Refresh();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            productDatabase.Serialize();
         }
     }
 }
