@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,21 +24,33 @@ namespace GameShop
         private DataGrid productsDataGrid;
         private double tax;
 
+        public string ProductName { get; set; }
+        public int UPC { get; set; }
+        public double Price { get; set; }
+
         public AddProductWindow(ProductDatabase database, DataGrid dataGrid, double productTax)
         {
             InitializeComponent();
+            this.DataContext = this;
             productDatabase = database;
             productsDataGrid = dataGrid;
             tax = productTax;
+            UPC = -1;
+            Price = -1;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(ProductName) || Price == -1 || UPC == -1)
+            {
+                MessageBox.Show("Morate popuniti sva polja");
+                return;
+            }
             productDatabase.AddProduct(new Product
             {
-                Name = ProductName.Text,
-                Price = double.Parse(PriceWithoutTax.Text),
-                UPC = int.Parse(UPCCode.Text),
+                Name = ProductName,
+                Price = Price,
+                UPC = UPC,
             });
             productDatabase.Tax = tax;
             productsDataGrid.Items.Refresh();

@@ -22,9 +22,27 @@
         <TextBlock Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" FontSize="14" VerticalAlignment="Center">UPC:</TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="2" Margin="20,0,0,0" FontSize="14" VerticalAlignment="Center">Cena bez poreza:</TextBlock>
 
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="ProductName" Margin="10,0,20,0" VerticalAlignment="Center" FontSize="14"></TextBox>
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="UPCCode" Margin="10,0,20,0" VerticalAlignment="Center" FontSize="14"></TextBox>
-        <TextBox Grid.Column="1" Grid.Row="2" x:Name="PriceWithoutTax" Margin="10,0,20,0" VerticalAlignment="Center" FontSize="14"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Name" Text="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,20,0" VerticalAlignment="Center" FontSize="14"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="UPCCode" Text="{Binding Path=UPC, UpdateSourceTrigger=PropertyChanged, StringFormat={}{##}}" Margin="10,0,20,0" VerticalAlignment="Center" FontSize="14">
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBlock Text="UPC mora biti ceo broj" Foreground="Red"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="2" x:Name="PriceWithoutTax" Text="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged, StringFormat={}{##.##}}" Margin="10,0,20,0" VerticalAlignment="Center" FontSize="14">
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder/>
+                        <TextBlock Text="Cena mora biti broj" Foreground="Red"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <Button Content="Sačuvaj" Grid.Row="3" Grid.ColumnSpan="2" Width="90" Height="35" Click="SaveButton_Click"/>
     </Grid>
 </Window>
