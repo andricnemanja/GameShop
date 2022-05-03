@@ -21,9 +21,24 @@ namespace GameShop
                 _tax = value;
                 foreach (Product product in Products)
                 {
-                    product.Update(_tax);
+                    product.Update(_tax, _discount);
                 }
 
+            }
+        }
+
+        private double _discount;
+
+        public double Discount
+        {
+            get { return _discount; }
+            set 
+            {      
+                _discount = value;
+                foreach (Product product in Products)
+                {
+                    product.Update(_tax, _discount);
+                }                
             }
         }
 

@@ -24,11 +24,12 @@ namespace GameShop
         public List<Product> Products { get; set; }
         private readonly ProductDatabase productDatabase;
         private double tax;
+        private double discount;
 
         public MainWindow()
         {
             DataContext = this;
-            productDatabase = new ProductDatabase(PRODUCTS_JSON) { Tax = 20 };
+            productDatabase = new ProductDatabase(PRODUCTS_JSON) { Tax = 20, Discount = 0 };
             productDatabase.Deserialize();
             Products = productDatabase.Products;
             InitializeComponent();
@@ -48,10 +49,23 @@ namespace GameShop
                 TaxInput.Text = ".0";
             }
         }
+        private void DiscountInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                discount = Convert.ToDouble(DiscountInput.Text);
+                productDatabase.Discount = discount;
+                dataGrid.Items.Refresh();
+            }
+            catch (Exception)
+            {
+                DiscountInput.Text = ".0";
+            }
+        }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            AddProductWindow addProductWindow = new AddProductWindow(productDatabase, dataGrid, tax);
+            AddProductWindow addProductWindow = new AddProductWindow(productDatabase, dataGrid, tax, discount);
             addProductWindow.Show();
         }
 
@@ -66,5 +80,6 @@ namespace GameShop
         {
             productDatabase.Serialize();
         }
+
     }
 }

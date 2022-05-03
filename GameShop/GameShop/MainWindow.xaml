@@ -24,14 +24,16 @@
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" Width ="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="UPC" Binding="{Binding UPC}" Width ="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Cena pre poreza" Binding="{Binding Price}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cena nakon poreza" Binding="{Binding PriceWithTax}" Width ="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cena nakon poreza" Binding="{Binding FinalPrice}" Width ="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">
             <Button Content="Dodaj proizvod" Width="100" Height="30" Margin="0,0,20,0" Click="AddProduct_Click"/>
             <Button Content="Obriši proizvod" Width="100" Height="30" Margin="0,0,20,0" Click="RemoveProduct_Click"/>
             <TextBlock VerticalAlignment="Center">Porez(%)</TextBlock>
-            <TextBox x:Name="TaxInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Text="20.0" TextChanged="TaxInput_TextChanged"></TextBox>
+            <TextBox x:Name="TaxInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,15,0" VerticalAlignment="Center" Text="20.0" TextChanged="TaxInput_TextChanged"></TextBox>
+            <TextBlock VerticalAlignment="Center">Popust(%)</TextBlock>
+            <TextBox x:Name="DiscountInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Text="0.0" TextChanged="DiscountInput_TextChanged"></TextBox>
         </StackPanel>
         </Grid>
 </Window>

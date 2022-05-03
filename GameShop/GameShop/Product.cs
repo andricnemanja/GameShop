@@ -11,11 +11,11 @@ namespace GameShop
         public string Name { get; set; }
         public int UPC { get; set; }
         public double Price { get; set; }
-        public double PriceWithTax { get; set; }
+        public double FinalPrice { get; set; }
 
-        public void Update(double newTax)
+        public void Update(double newTax, double newDiscount)
         {
-            PriceWithTax = Math.Round(Price + Price * newTax / 100, 2);
+            FinalPrice = Math.Round(Price + Price * newTax / 100 - Price * newDiscount / 100, 2);
         }
     }
 }
