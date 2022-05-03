@@ -23,8 +23,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" Width ="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="UPC" Binding="{Binding UPC}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cena pre poreza" Binding="{Binding Price}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cena nakon poreza" Binding="{Binding FinalPrice}" Width ="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount}" Width ="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos popusta" Binding="{Binding DiscountAmount}" Width ="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">
