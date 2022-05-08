@@ -20,7 +20,7 @@ namespace GameShop
     /// </summary>
     public partial class AddProductWindow : Window
     {
-        private ProductDatabase productDatabase;
+        public ProductDatabase ProductDatabase { get; set; }
         private DataGrid productsDataGrid;
         private double tax;
         private double discount;
@@ -33,12 +33,10 @@ namespace GameShop
         {
             InitializeComponent();
             this.DataContext = this;
-            productDatabase = database;
+            ProductDatabase = database;
             productsDataGrid = dataGrid;
             tax = productTax;
             discount = productDiscount;
-            UPC = -1;
-            Price = -1;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -48,14 +46,14 @@ namespace GameShop
                 MessageBox.Show("Morate popuniti sva polja");
                 return;
             }
-            productDatabase.AddProduct(new Product
+            ProductDatabase.AddProduct(new Product
             {
                 Name = ProductName,
                 Price = Price,
                 UPC = UPC,
             });
-            productDatabase.Tax = tax;
-            productDatabase.Discount = discount;
+            ProductDatabase.Tax = tax;
+            ProductDatabase.Discount = discount;
             productsDataGrid.Items.Refresh();
             this.Close();
         }

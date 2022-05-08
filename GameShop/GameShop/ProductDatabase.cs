@@ -10,7 +10,7 @@ namespace GameShop
 {
     public class ProductDatabase
     {
-        public List<Product> Products { get; set; }
+        public static List<Product> Products { get; set; }
         private string serializationFileName;
         private double _tax;
         public double Tax
@@ -51,6 +51,16 @@ namespace GameShop
         public void AddProduct(Product product)
         {
             Products.Add(product);
+        }
+
+        public static bool IsUPCUnique(int UPC)
+        {
+            foreach(Product product in Products)
+            {
+                if (product.UPC == UPC)
+                    return false;
+            }
+            return true;
         }
 
         public void Serialize()

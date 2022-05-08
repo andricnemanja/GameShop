@@ -31,7 +31,7 @@ namespace GameShop
             DataContext = this;
             productDatabase = new ProductDatabase(PRODUCTS_JSON) { Tax = 20, Discount = 0 };
             productDatabase.Deserialize();
-            Products = productDatabase.Products;
+            Products = ProductDatabase.Products;
             InitializeComponent();
             
         }
@@ -65,14 +65,17 @@ namespace GameShop
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            AddProductWindow addProductWindow = new AddProductWindow(productDatabase, dataGrid, tax, discount);
-            addProductWindow.Show();
+            AddProductWindow addProductWindow = new AddProductWindow(productDatabase, dataGrid, tax, discount)
+            {
+                Owner = this
+            };
+            addProductWindow.ShowDialog();
         }
 
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             Product productToRemove = (Product)dataGrid.SelectedItem;
-            productDatabase.Products.Remove(productToRemove);
+            ProductDatabase.Products.Remove(productToRemove);
             dataGrid.Items.Refresh();
         }
 

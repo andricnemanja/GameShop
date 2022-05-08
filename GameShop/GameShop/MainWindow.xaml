@@ -19,14 +19,14 @@
         </Grid.ColumnDefinitions>
         
         <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
-        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" IsReadOnly="True"  AutoGenerateColumns="False" >
+        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="UPC" Binding="{Binding UPC}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos popusta" Binding="{Binding DiscountAmount}" Width ="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos popusta" Binding="{Binding DiscountAmount}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">
