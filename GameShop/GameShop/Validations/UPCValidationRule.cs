@@ -25,6 +25,8 @@ namespace GameShop.Validations
             if(!ProductDatabase.IsUPCUnique(UPC))
                 return new ValidationResult(false, "UPC mora biti jedinstven");
 
+            if (UPC < 0)
+                return new ValidationResult(false, "UPC mora biti veci od 0");
 
             return new ValidationResult(true, null);
         }

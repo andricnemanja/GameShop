@@ -16,7 +16,10 @@ namespace GameShop.Validations
             double number;
 
             if(!double.TryParse(input, out number))
-                return new ValidationResult(false, "Cena mora biti ceo broj");
+                return new ValidationResult(false, "Cena mora biti broj");
+
+            if (number < 0)
+                return new ValidationResult(false, "Cena mora biti veca od 0");
 
             return new ValidationResult(true, null);
         }

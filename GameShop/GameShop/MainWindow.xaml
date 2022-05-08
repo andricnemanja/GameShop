@@ -8,16 +8,17 @@
         Title="Game Shop" Height="500" Width="850"
         Closing="Window_Closing">
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
         <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" >
             <DataGrid.Columns>
