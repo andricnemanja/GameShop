@@ -18,8 +18,14 @@ namespace GameShop
         public void Update(double newTax, double newDiscount)
         {
             FinalPrice = Math.Round(Price + Price * newTax / 100 - Price * newDiscount / 100, 2);
+            if(FinalPrice < 0) 
+                FinalPrice = 0;
+
             DiscountAmount = Math.Round(Price * newDiscount / 100, 2);
             TaxAmount = Math.Round(Price * newTax / 100, 2);
+
+            if(DiscountAmount > Price + TaxAmount) 
+                DiscountAmount = Price + TaxAmount;
         }
     }
 }
