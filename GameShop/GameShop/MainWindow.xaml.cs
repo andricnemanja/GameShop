@@ -94,5 +94,41 @@ namespace GameShop
             productDatabase.Serialize();
         }
 
+        private void AdditionalDiscountButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<Product> selectedProducts = GetSelectedProducts();
+            
+            if (selectedProducts.Count == 0)
+            {
+                AdditionalDiscount additionalDiscount = new AdditionalDiscount(productDatabase, dataGrid)
+                {
+                    Owner = this
+                };
+                additionalDiscount.ShowDialog();
+                return;
+            }
+
+            AdditionalDiscountWindow additionalDiscountWindow = new AdditionalDiscountWindow(selectedProducts, dataGrid) 
+            { 
+                Owner = this 
+            };
+            additionalDiscountWindow.ShowDialog();
+        }
+
+
+        private List<Product> GetSelectedProducts()
+        {
+            List<Product> selectedProducts = new List<Product>();
+            foreach (Object selectedItem in dataGrid.SelectedItems)
+            {
+                selectedProducts.Add((Product)selectedItem);
+            }
+            return selectedProducts;
+        }
+
+        private void dataGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            dataGrid.SelectedItem = null;
+        }
     }
 }

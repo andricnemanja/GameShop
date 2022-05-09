@@ -27,19 +27,21 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
-        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" >
+        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount, Converter={StaticResource TaxAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Iznos popusta" Binding="{Binding DiscountAmount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos dodatnog popusta" Binding="{Binding AdditionalDiscountAmount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">
             <Button Content="Dodaj proizvod" Width="100" Height="30" Margin="0,0,20,0" Click="AddProduct_Click"/>
             <Button Content="Obriši proizvod" Width="100" Height="30" Margin="0,0,20,0" Click="RemoveProduct_Click"/>
+            <Button Content="Dodatni popust" Width="100" Height="30" Margin="0,0,20,0" Click="AdditionalDiscountButton_Click"/>
             <TextBlock VerticalAlignment="Center">Porez(%)</TextBlock>
             <TextBox x:Name="TaxInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,15,0" VerticalAlignment="Center" Text="20.0" TextChanged="TaxInput_TextChanged"></TextBox>
             <TextBlock VerticalAlignment="Center">Popust(%)</TextBlock>

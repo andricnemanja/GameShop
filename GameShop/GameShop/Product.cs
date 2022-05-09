@@ -14,10 +14,18 @@ namespace GameShop
         public double FinalPrice { get; set; }
         public double DiscountAmount { get; set; }
         public double TaxAmount { get; set; }
+        public double AdditionalDiscountAmount { get; set; }
+
+        public Product()
+        {
+            DiscountAmount = 0;
+            AdditionalDiscountAmount = 0;
+            TaxAmount = 0;
+        }
 
         public void Update(double newTax, double newDiscount)
         {
-            FinalPrice = Math.Round(Price + Price * newTax / 100 - Price * newDiscount / 100, 2);
+            FinalPrice = Math.Round(Price + Price * newTax / 100 - Price * newDiscount / 100 - AdditionalDiscountAmount, 2);
             if(FinalPrice < 0) 
                 FinalPrice = 0;
 
@@ -26,6 +34,12 @@ namespace GameShop
 
             if(DiscountAmount > Price + TaxAmount) 
                 DiscountAmount = Price + TaxAmount;
+        }
+
+        public void UpdateAdditionalDiscount(double additionalDiscount)
+        {
+            AdditionalDiscountAmount = Math.Round(Price * additionalDiscount / 100, 2);
+            FinalPrice = Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount;
         }
     }
 }

@@ -3,16 +3,18 @@
     "Name": "Fifa 2022",
     "UPC": 1000,
     "Price": 4999.99,
-    "FinalPrice": 4999.99,
-    "DiscountAmount": -0,
-    "TaxAmount": 0
+    "FinalPrice": 5499.99,
+    "DiscountAmount": 0,
+    "TaxAmount": 1000,
+    "AdditionalDiscountAmount": 500
   },
   {
     "Name": "Pro Evolution Soccer 2022",
     "UPC": 1001,
     "Price": 3999.99,
-    "FinalPrice": 3999.99,
-    "DiscountAmount": -0,
-    "TaxAmount": 0
+    "FinalPrice": 4399.99,
+    "DiscountAmount": 0,
+    "TaxAmount": 800,
+    "AdditionalDiscountAmount": 400
   }
 ]
