@@ -51,7 +51,7 @@ namespace GameShop
         private void DiscountInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             double newDiscount;
-            if (!double.TryParse(TaxInput.Text, out newDiscount))
+            if (!double.TryParse(DiscountInput.Text, out newDiscount))
             {
                 DiscountInput.Text = String.Empty;
                 return;
