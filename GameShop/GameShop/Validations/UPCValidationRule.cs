@@ -22,7 +22,7 @@ namespace GameShop.Validations
             if (!int.TryParse(upcString, out UPC))
                 return new ValidationResult(false, "UPC mora biti ceo broj");
 
-            if(!ProductDatabase.IsUPCUnique(UPC))
+            if (!ProductDatabase.IsUPCUnique(UPC))
                 return new ValidationResult(false, "UPC mora biti jedinstven");
 
             if (UPC < 0)

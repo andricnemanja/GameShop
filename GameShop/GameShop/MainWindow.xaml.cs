@@ -38,29 +38,27 @@ namespace GameShop
 
         private void TaxInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            try
+            double newTax;
+            if (!double.TryParse(TaxInput.Text, out newTax))
             {
-                tax = Convert.ToDouble(TaxInput.Text);
-                productDatabase.Tax = tax;
-                dataGrid.Items.Refresh();
+                TaxInput.Text = String.Empty;
+                return;
             }
-            catch (Exception)
-            {
-                TaxInput.Text = ".0";
-            }
+            productDatabase.Tax = newTax;
+            dataGrid.Items.Refresh();
         }
+
         private void DiscountInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            try
+            double newDiscount;
+            if (!double.TryParse(TaxInput.Text, out newDiscount))
             {
-                discount = Convert.ToDouble(DiscountInput.Text);
-                productDatabase.Discount = discount;
-                dataGrid.Items.Refresh();
+                DiscountInput.Text = String.Empty;
+                return;
             }
-            catch (Exception)
-            {
-                DiscountInput.Text = ".0";
-            }
+            productDatabase.Discount = newDiscount;
+            dataGrid.Items.Refresh();
+
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
