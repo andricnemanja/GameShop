@@ -41,11 +41,17 @@ namespace GameShop
             double newTax;
             if (!double.TryParse(TaxInput.Text, out newTax))
             {
-                TaxInput.Text = String.Empty;
-                return;
+                TaxInput.Text = ".0";
             }
-            productDatabase.Tax = newTax;
-            dataGrid.Items.Refresh();
+            else if(newTax < 0)
+            {
+                TaxInput.Text = ".0";
+            }
+            else
+            {
+                productDatabase.Tax = newTax;
+                dataGrid.Items.Refresh();
+            }
         }
 
         private void DiscountInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -53,11 +59,17 @@ namespace GameShop
             double newDiscount;
             if (!double.TryParse(DiscountInput.Text, out newDiscount))
             {
-                DiscountInput.Text = String.Empty;
-                return;
+                DiscountInput.Text = ".0";
             }
-            productDatabase.Discount = newDiscount;
-            dataGrid.Items.Refresh();
+            else if(newDiscount < 0)
+            {
+                DiscountInput.Text = ".0";
+            }
+            else
+            {
+                productDatabase.Discount = newDiscount;
+                dataGrid.Items.Refresh();
+            }
 
         }
 
