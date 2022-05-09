@@ -3,10 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GameShop"
+        xmlns:local="clr-namespace:GameShop" xmlns:converters="clr-namespace:GameShop.Converters"
         mc:Ignorable="d"
         Title="Game Shop" Height="500" Width="850"
         Closing="Window_Closing">
+
+    <Window.Resources>
+        <converters:DiscountAmountConverter x:Key="DiscountAmountConverter" />
+        <converters:TaxAmountConverter x:Key="TaxAmountConverter" />
+    </Window.Resources>
+    
+
     <Grid>
         
         <Grid.RowDefinitions>
@@ -25,8 +32,8 @@
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos popusta" Binding="{Binding DiscountAmount}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount, Converter={StaticResource TaxAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos popusta" Binding="{Binding DiscountAmount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
