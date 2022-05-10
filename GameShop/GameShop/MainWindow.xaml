@@ -33,8 +33,7 @@
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount, Converter={StaticResource TaxAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos popusta" Binding="{Binding DiscountAmount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos dodatnog popusta" Binding="{Binding AdditionalDiscountAmount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Ukupan popust" Binding="{Binding TotalDiscount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>

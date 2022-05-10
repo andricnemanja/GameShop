@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameShop" xmlns:val="clr-namespace:GameShop.Validations"
         mc:Ignorable="d"
-        Title="AdditionalDiscount" Height="170" Width="300" WindowStartupLocation="CenterOwner">
+        Title="AdditionalDiscount" Height="190" Width="300" WindowStartupLocation="CenterOwner">
     <Grid HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
