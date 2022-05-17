@@ -130,5 +130,17 @@ namespace GameShop
         {
             dataGrid.SelectedItem = null;
         }
+
+        private void DiscountBeforeTaxCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            productDatabase.DiscountBeforeTax = true;
+            dataGrid.Items.Refresh();
+        }
+
+        private void DiscountBeforeTaxCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            productDatabase.DiscountBeforeTax = false;
+            dataGrid.Items.Refresh();
+        }
     }
 }

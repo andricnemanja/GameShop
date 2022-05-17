@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameShop" xmlns:converters="clr-namespace:GameShop.Converters"
         mc:Ignorable="d"
-        Title="Game Shop" Height="500" Width="850"
+        Title="Game Shop" Height="500" Width="920"
         Closing="Window_Closing">
 
     <Window.Resources>
@@ -45,6 +45,8 @@
             <TextBox x:Name="TaxInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,15,0" VerticalAlignment="Center" Text="20.0" TextChanged="TaxInput_TextChanged"></TextBox>
             <TextBlock VerticalAlignment="Center">Popust(%)</TextBlock>
             <TextBox x:Name="DiscountInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Text="0.0" TextChanged="DiscountInput_TextChanged"></TextBox>
+            <CheckBox x:Name="DiscountBeforeTaxCheckBox" Content="Primeni popust pre poreza" VerticalAlignment="Center"  Margin="10,0,0,0" Checked="DiscountBeforeTaxCheckBox_Checked" Unchecked="DiscountBeforeTaxCheckBox_Unchecked"/>
+
         </StackPanel>
         </Grid>
 </Window>

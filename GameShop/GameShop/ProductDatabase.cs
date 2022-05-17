@@ -42,6 +42,24 @@ namespace GameShop
             }
         }
 
+        private bool _discountBeforeTax;
+
+        public bool DiscountBeforeTax
+        {
+            get { return _discountBeforeTax; }
+            set 
+            { 
+                _discountBeforeTax = value;
+                foreach (Product product in Products)
+                {
+                    product.DiscountBeforeTax = _discountBeforeTax;
+                    product.Update(_tax, _discount);
+                }
+            }
+        }
+
+
+
         public ProductDatabase(string fileName)
         {
             Products = new();
