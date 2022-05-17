@@ -5,9 +5,11 @@
     "Price": 4999.99,
     "FinalPrice": 5999.99,
     "DiscountAmount": 0,
+    "Tax": 20,
     "TaxAmount": 1000,
     "AdditionalDiscountAmount": 0,
-    "TotalDiscount": 0
+    "TotalDiscount": 0,
+    "AdditionalDiscountBeforeTax": true
   },
   {
     "Name": "Pro Evolution Soccer 2022",
@@ -15,8 +17,10 @@
     "Price": 3999.99,
     "FinalPrice": 4799.99,
     "DiscountAmount": 0,
+    "Tax": 20,
     "TaxAmount": 800,
     "AdditionalDiscountAmount": 0,
-    "TotalDiscount": 0
+    "TotalDiscount": 0,
+    "AdditionalDiscountBeforeTax": true
   }
 ]

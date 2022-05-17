@@ -41,7 +41,20 @@ namespace GameShop
             }
         }
 
-
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(ProductSelection productSelection in ProductSelections)
+            {
+                if(productSelection.IsSelected)
+                {
+                    productSelection.Product.AdditionalDiscountBeforeTax = 
+                        (bool)DiscountBeforeTaxCheckBox.IsChecked;
+                    productSelection.Product.UpdateAdditionalDiscount(Discount);
+                }
+            }
+            mainWindowDataGrid.Items.Refresh();
+            this.Close();
+        }
 
         public class ProductSelection
         {
@@ -52,19 +65,6 @@ namespace GameShop
             {
                 IsSelected = false;
             }
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            foreach(ProductSelection productSelection in ProductSelections)
-            {
-                if(productSelection.IsSelected)
-                {
-                    productSelection.Product.UpdateAdditionalDiscount(Discount);
-                }
-            }
-            mainWindowDataGrid.Items.Refresh();
-            this.Close();
         }
     }
 }

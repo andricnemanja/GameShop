@@ -36,6 +36,7 @@ namespace GameShop
         {
             foreach(Product product in products)
             {
+                product.AdditionalDiscountBeforeTax = (bool)DiscountBeforeTaxCheckBox.IsChecked;
                 product.UpdateAdditionalDiscount(Discount);
             }
             mainWindowDataGrid.Items.Refresh();
