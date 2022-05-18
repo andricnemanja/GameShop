@@ -38,7 +38,7 @@ namespace GameShop
             Tax = newTax;
             DiscountAmount = Math.Round(Price * newDiscount / 100, 2);
             TaxAmount = CalculateTaxAmount();
-            FinalPrice = Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount;
+            FinalPrice = Math.Round(Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount, 2);
 
             if (FinalPrice < 0) 
                 FinalPrice = 0;
@@ -54,7 +54,7 @@ namespace GameShop
             AdditionalDiscountAmount = Math.Round(Price * additionalDiscount / 100, 2);
             TotalDiscount = DiscountAmount + AdditionalDiscountAmount;
             TaxAmount = CalculateTaxAmount();
-            FinalPrice = Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount;
+            FinalPrice = Math.Round(Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount, 2);
         }
 
         private double CalculateTaxAmount()
