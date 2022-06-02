@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace GameShop
 {
     public class ProductDatabase
     {
-        public static List<Product> Products { get; set; }
+        public static ObservableCollection<Product> Products { get; set; }
         private string serializationFileName;
         private double _tax;
         public double Tax
@@ -91,7 +92,7 @@ namespace GameShop
         public void Deserialize()
         {
             string jsonString = File.ReadAllText(serializationFileName);
-            Products = JsonSerializer.Deserialize<List<Product>>(jsonString);
+            Products = JsonSerializer.Deserialize<ObservableCollection<Product>>(jsonString);
         }
     }
 }

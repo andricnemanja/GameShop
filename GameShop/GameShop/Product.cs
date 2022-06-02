@@ -1,27 +1,167 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameShop
 {
-    public class Product
+    public class Product : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public int UPC { get; set; }
-        public double Price { get; set; }
-        public double FinalPrice { get; set; }
-        public double DiscountAmount { get; set; }
-        public double Tax { get; set; }
-        public double TaxAmount { get; set; }
-        public double AdditionalDiscountAmount { get; set; }
-        public double TotalDiscount { get; set; }
-        public bool AdditionalDiscountBeforeTax { get; 
-            set;
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set 
+            {
+                if(_name != value)
+                {
+                    _name = value; 
+                    RaisePropertyChanged("Name");
+                }
+            }
         }
-        public bool DiscountBeforeTax { get; 
-            set; }
+
+        private int _upc;
+        public int UPC
+        {
+            get { return _upc; }
+            set
+            {
+                if (_upc != value)
+                {
+                    _upc = value;
+                    RaisePropertyChanged("UPC");
+                }
+            }
+        }
+
+        private double _price;
+        public double Price
+        {
+            get { return _price; }
+            set
+            {
+                if (_price != value)
+                {
+                    _price = value;
+                    RaisePropertyChanged("Price");
+                }
+            }
+        }
+
+        private double _finalPrice;
+        public double FinalPrice
+        {
+            get { return _finalPrice; }
+            set
+            {
+                if (_finalPrice != value)
+                {
+                    _finalPrice = value;
+                    RaisePropertyChanged("FinalPrice");
+                }
+            }
+        }
+
+        private double _discountAmount;
+        public double DiscountAmount
+        {
+            get { return _discountAmount; }
+            set
+            {
+                if (_discountAmount != value)
+                {
+                    _discountAmount = value;
+                    RaisePropertyChanged("DiscountAmount");
+                }
+            }
+        }
+
+        private double _tax;
+        public double Tax
+        {
+            get { return _tax; }
+            set
+            {
+                if (_tax != value)
+                {
+                    _tax = value;
+                    RaisePropertyChanged("DiscountAmount");
+                }
+            }
+        }
+
+        private double _taxAmount;
+        public double TaxAmount
+        {
+            get { return _taxAmount; }
+            set
+            {
+                if (_taxAmount != value)
+                {
+                    _taxAmount = value;
+                    RaisePropertyChanged("TaxAmount");
+                }
+            }
+        }
+
+        private double _additionalDiscountAmount;
+        public double AdditionalDiscountAmount
+        {
+            get { return _additionalDiscountAmount; }
+            set
+            {
+                if (_additionalDiscountAmount != value)
+                {
+                    _additionalDiscountAmount = value;
+                    RaisePropertyChanged("AdditionalDiscountAmount");
+                }
+            }
+        }
+
+        private double _totalDiscount;
+        public double TotalDiscount
+        {
+            get { return _totalDiscount; }
+            set
+            {
+                if (_totalDiscount != value)
+                {
+                    _totalDiscount = value;
+                    RaisePropertyChanged("TotalDiscount");
+                }
+            }
+        }
+
+        private bool _additionalDiscountBeforeTax;
+        public bool AdditionalDiscountBeforeTax
+        {
+            get { return _additionalDiscountBeforeTax; }
+            set
+            {
+                if (_additionalDiscountBeforeTax != value)
+                {
+                    _additionalDiscountBeforeTax = value;
+                    RaisePropertyChanged("AdditionalDiscountBeforeTax");
+                }
+            }
+        }
+
+        private bool _discountBeforeTax;
+        public bool DiscountBeforeTax
+        {
+            get { return _discountBeforeTax; }
+            set
+            {
+                if (_discountBeforeTax != value)
+                {
+                    _discountBeforeTax = value;
+                    RaisePropertyChanged("DiscountBeforeTax");
+                }
+            }
+        }
 
         public Product()
         {
@@ -77,5 +217,16 @@ namespace GameShop
             return Math.Round(Price * Tax / 100, 2);
             
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+
     }
 }

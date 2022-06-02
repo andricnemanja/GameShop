@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameShop" xmlns:converters="clr-namespace:GameShop.Converters"
         mc:Ignorable="d"
-        Title="Game Shop" Height="500" Width="920"
-        Closing="Window_Closing">
+        Title="Game Shop" Height="500" Width="920">
 
     <Window.Resources>
         <converters:DiscountAmountConverter x:Key="DiscountAmountConverter" />
         <converters:TaxAmountConverter x:Key="TaxAmountConverter" />
     </Window.Resources>
     
+    <Window.DataContext>
+        <local:MainWindowCommands/>
+    </Window.DataContext>
 
     <Grid>
         
@@ -27,7 +29,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
-        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" >
+        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding SelectedProduct}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
@@ -38,14 +40,14 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">
-            <Button Content="Dodaj proizvod" Width="100" Height="30" Margin="0,0,20,0" Click="AddProduct_Click"/>
-            <Button Content="Obriši proizvod" Width="100" Height="30" Margin="0,0,20,0" Click="RemoveProduct_Click"/>
-            <Button Content="Dodatni popust" Width="100" Height="30" Margin="0,0,20,0" Click="AdditionalDiscountButton_Click"/>
+            <Button Content="Dodaj proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AddProductCommand}"/>
+            <Button Content="Obriši proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding RemoveProductCommand}"/>
+            <Button Content="Dodatni popust" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AdditionalDiscountCommand}"/>
             <TextBlock VerticalAlignment="Center">Porez(%)</TextBlock>
-            <TextBox x:Name="TaxInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,15,0" VerticalAlignment="Center" Text="20.0" TextChanged="TaxInput_TextChanged"></TextBox>
+            <TextBox x:Name="TaxInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,15,0" VerticalAlignment="Center" Text="{Binding Tax, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <TextBlock VerticalAlignment="Center">Popust(%)</TextBlock>
-            <TextBox x:Name="DiscountInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Text="0.0" TextChanged="DiscountInput_TextChanged"></TextBox>
-            <CheckBox x:Name="DiscountBeforeTaxCheckBox" Content="Primeni popust pre poreza" VerticalAlignment="Center"  Margin="10,0,0,0" Checked="DiscountBeforeTaxCheckBox_Checked" Unchecked="DiscountBeforeTaxCheckBox_Unchecked"/>
+            <TextBox x:Name="DiscountInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+            <CheckBox x:Name="DiscountBeforeTaxCheckBox" Content="Primeni popust pre poreza" VerticalAlignment="Center"  Margin="10,0,0,0" IsChecked="{Binding IsDiscountBeforeTaxChecked}"/>
 
         </StackPanel>
         </Grid>

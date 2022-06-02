@@ -21,7 +21,6 @@ namespace GameShop
     public partial class AddProductWindow : Window
     {
         public ProductDatabase ProductDatabase { get; set; }
-        private DataGrid productsDataGrid;
         private double tax;
         private double discount;
 
@@ -29,12 +28,11 @@ namespace GameShop
         public int UPC { get; set; }
         public double Price { get; set; }
 
-        public AddProductWindow(ProductDatabase database, DataGrid dataGrid, double productTax, double productDiscount)
+        public AddProductWindow(ProductDatabase database, double productTax, double productDiscount)
         {
             InitializeComponent();
             this.DataContext = this;
             ProductDatabase = database;
-            productsDataGrid = dataGrid;
             tax = productTax;
             discount = productDiscount;
         }
@@ -54,7 +52,6 @@ namespace GameShop
             });
             ProductDatabase.Tax = tax;
             ProductDatabase.Discount = discount;
-            productsDataGrid.Items.Refresh();
             this.Close();
         }
     }

@@ -21,19 +21,16 @@ namespace GameShop
     public partial class AdditionalDiscount : Window
     {
         private ProductDatabase productDatabase;
-        private DataGrid mainWindowDataGrid;
-
         public double Discount { get; set; }
         public ObservableCollection<ProductSelection> ProductSelections { get; set; }
 
-        public AdditionalDiscount(ProductDatabase database, DataGrid dataGrid)
+        public AdditionalDiscount(ProductDatabase database)
         {
             productDatabase = database;
             InitializeComponent();
             this.DataContext = this;
             ProductSelections = new ObservableCollection<ProductSelection>();
             Discount = 0;
-            mainWindowDataGrid = dataGrid;
 
             foreach(Product product in ProductDatabase.Products)
             {
@@ -52,7 +49,6 @@ namespace GameShop
                     productSelection.Product.UpdateAdditionalDiscount(Discount);
                 }
             }
-            mainWindowDataGrid.Items.Refresh();
             this.Close();
         }
 

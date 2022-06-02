@@ -22,11 +22,9 @@ namespace GameShop
     {
         public double Discount { get; set; }
         private List<Product> products;
-        private DataGrid mainWindowDataGrid;
-        public AdditionalDiscountWindow(List<Product> selectedProducts, DataGrid dataGrid)
+        public AdditionalDiscountWindow(List<Product> selectedProducts )
         {
             products = selectedProducts;
-            mainWindowDataGrid = dataGrid;
             InitializeComponent();
             this.DataContext = this;
             
@@ -39,7 +37,6 @@ namespace GameShop
                 product.AdditionalDiscountBeforeTax = (bool)DiscountBeforeTaxCheckBox.IsChecked;
                 product.UpdateAdditionalDiscount(Discount);
             }
-            mainWindowDataGrid.Items.Refresh();
             this.Close();
         }
     }
