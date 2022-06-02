@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -163,6 +164,21 @@ namespace GameShop
             }
         }
 
+        public ObservableCollection<AdditionalExpense> AdditionalExpenses { get; set; }
+
+        private double _additionalExpensesAmount = 0;
+
+        public double AdditionalExpensesAmount
+        {
+            get { return _additionalExpensesAmount; }
+            set 
+            { 
+                _additionalExpensesAmount = value;
+                RaisePropertyChanged("AdditionalExpensesAmount");
+            }
+        }
+
+
         public Product()
         {
             AdditionalDiscountBeforeTax = false;
@@ -171,6 +187,7 @@ namespace GameShop
             AdditionalDiscountAmount = 0;
             TaxAmount = 0;
             Tax = 0;
+            AdditionalExpenses = new ObservableCollection<AdditionalExpense>();
         }
 
         public void Update(double newTax, double newDiscount)
@@ -216,6 +233,21 @@ namespace GameShop
             
             return Math.Round(Price * Tax / 100, 2);
             
+        }
+
+
+        public void addExpense(AdditionalExpense newAdditionalExpense)
+        {
+            AdditionalExpenses.Add(newAdditionalExpense);
+            if(newAdditionalExpense.Amount != 0)
+            {
+                FinalPrice += newAdditionalExpense.Amount;
+                AdditionalExpensesAmount += newAdditionalExpense.Amount;
+                return;
+            }
+            double newAdditionalExpenseAmount = Math.Round(Price * newAdditionalExpense.PricePercentage / 100, 2);
+            FinalPrice += newAdditionalExpenseAmount;
+            AdditionalExpensesAmount += newAdditionalExpenseAmount;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

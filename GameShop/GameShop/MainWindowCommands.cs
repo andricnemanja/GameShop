@@ -19,6 +19,7 @@ namespace GameShop
         public BaseCommand AddProductCommand { get; set; }
         public BaseCommand RemoveProductCommand { get; set; }
         public BaseCommand AdditionalDiscountCommand { get; set; }
+        public BaseCommand AdditionalExpenseCommand { get; set; }
 
         private double _tax = 20;
         public double Tax
@@ -58,16 +59,6 @@ namespace GameShop
             }
         }
 
-        private bool _isDiscountBeforeTaxChecked;
-        public bool IsDiscountBeforeTaxChecked
-        {
-            get { return _isDiscountBeforeTaxChecked; }
-            set 
-            { 
-                _isDiscountBeforeTaxChecked = value;
-                productDatabase.DiscountBeforeTax = _isDiscountBeforeTaxChecked;
-            }
-        }
 
 
 
@@ -79,6 +70,7 @@ namespace GameShop
             AddProductCommand = new BaseCommand(AddProductExecuteMethod);
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);
             AdditionalDiscountCommand = new BaseCommand(AdditionalDiscountExecuteMethod);
+            AdditionalExpenseCommand = new BaseCommand(AdditionalExpenseExecuteMethod);
         }
 
         private void AddProductExecuteMethod()
@@ -120,6 +112,12 @@ namespace GameShop
             return selectedProducts;
         }
 
-       
+        private void AdditionalExpenseExecuteMethod()
+        {
+            AdditionalExpensesWindow additionalExpensesWindow = new AdditionalExpensesWindow(SelectedProduct);
+            additionalExpensesWindow.ShowDialog();
+        }
+
+
     }
 }

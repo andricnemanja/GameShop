@@ -39,11 +39,6 @@ namespace GameShop
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(ProductName) || Price == -1 || UPC == -1)
-            {
-                MessageBox.Show("Morate popuniti sva polja");
-                return;
-            }
             ProductDatabase.AddProduct(new Product
             {
                 Name = ProductName,

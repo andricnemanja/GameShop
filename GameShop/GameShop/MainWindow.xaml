@@ -36,6 +36,19 @@
                 <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount, Converter={StaticResource TaxAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Ukupan popust" Binding="{Binding TotalDiscount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding AdditionalExpensesAmount}" Width ="*" IsReadOnly="True" >
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <ListBox FontSize="14" Height="100" Width="150" ItemsSource="{Binding AdditionalExpenses}">
+                                        
+                                    </ListBox>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
@@ -43,11 +56,11 @@
             <Button Content="Dodaj proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AddProductCommand}"/>
             <Button Content="Obriši proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding RemoveProductCommand}"/>
             <Button Content="Dodatni popust" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AdditionalDiscountCommand}"/>
+            <Button Content="Dodatni troškovi" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AdditionalExpenseCommand}"/>
             <TextBlock VerticalAlignment="Center">Porez(%)</TextBlock>
             <TextBox x:Name="TaxInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,15,0" VerticalAlignment="Center" Text="{Binding Tax, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <TextBlock VerticalAlignment="Center">Popust(%)</TextBlock>
             <TextBox x:Name="DiscountInput" Grid.Row="2" Width="50" Height="20" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
-            <CheckBox x:Name="DiscountBeforeTaxCheckBox" Content="Primeni popust pre poreza" VerticalAlignment="Center"  Margin="10,0,0,0" IsChecked="{Binding IsDiscountBeforeTaxChecked}"/>
 
         </StackPanel>
         </Grid>
