@@ -150,19 +150,6 @@ namespace GameShop
             }
         }
 
-        private bool _discountBeforeTax;
-        public bool DiscountBeforeTax
-        {
-            get { return _discountBeforeTax; }
-            set
-            {
-                if (_discountBeforeTax != value)
-                {
-                    _discountBeforeTax = value;
-                    RaisePropertyChanged("DiscountBeforeTax");
-                }
-            }
-        }
 
         public ObservableCollection<AdditionalExpense> AdditionalExpenses { get; set; }
 
@@ -178,11 +165,9 @@ namespace GameShop
             }
         }
 
-
         public Product()
         {
             AdditionalDiscountBeforeTax = false;
-            DiscountBeforeTax = false;
             DiscountAmount = 0;
             AdditionalDiscountAmount = 0;
             TaxAmount = 0;
@@ -216,27 +201,15 @@ namespace GameShop
 
         private double CalculateTaxAmount()
         {
-            if (DiscountBeforeTax && AdditionalDiscountBeforeTax)
-            {
-                return Math.Round((Price - AdditionalDiscountAmount - DiscountAmount) * Tax / 100, 2);
-            }
-
-            if (DiscountBeforeTax == false && AdditionalDiscountBeforeTax)
-            {
+            if (AdditionalDiscountBeforeTax)
                 return Math.Round((Price - AdditionalDiscountAmount) * Tax / 100, 2);
-            }
 
-            if (DiscountBeforeTax && AdditionalDiscountBeforeTax == false)
-            {
-                return Math.Round((Price - DiscountAmount) * Tax / 100, 2);
-            }
-            
             return Math.Round(Price * Tax / 100, 2);
             
         }
 
 
-        public void addExpense(AdditionalExpense newAdditionalExpense)
+        public void AddExpense(AdditionalExpense newAdditionalExpense)
         {
             AdditionalExpenses.Add(newAdditionalExpense);
             if(newAdditionalExpense.Amount != 0)
@@ -248,6 +221,22 @@ namespace GameShop
             double newAdditionalExpenseAmount = Math.Round(Price * newAdditionalExpense.PricePercentage / 100, 2);
             FinalPrice += newAdditionalExpenseAmount;
             AdditionalExpensesAmount += newAdditionalExpenseAmount;
+        }
+
+        public void RemoveExpense(AdditionalExpense additionalExpense)
+        {
+            AdditionalExpenses.Remove(additionalExpense);
+
+            if(additionalExpense.Amount > 0)
+            {
+                FinalPrice -= additionalExpense.Amount;
+                AdditionalExpensesAmount -= additionalExpense.Amount;
+                return;
+            }
+
+            FinalPrice = Math.Round(FinalPrice - additionalExpense.PricePercentage / 100 * Price);
+            AdditionalExpensesAmount = Math.Round(AdditionalExpensesAmount - additionalExpense.PricePercentage / 100 * Price);
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

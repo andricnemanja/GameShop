@@ -46,23 +46,32 @@ namespace GameShop
 
         public Product SelectedProduct { get; set; }
 
+        public AdditionalExpense SelectedExpense { get; set; }
+
         public BaseCommand SaveAdditionalExpenseCommand { get; set; }
+        public BaseCommand RemoveAdditionalExpenseCommand { get; set; }
+
 
         public AdditionalExpenseWindowCommands(Product selectedProduct)
         {
             SelectedProduct = selectedProduct;
             SaveAdditionalExpenseCommand = new BaseCommand(SaveAdditionalExpenseExecuteMethod);
+            RemoveAdditionalExpenseCommand = new BaseCommand(RemoveAdditionalExpenseExecuteMethod);
         }
 
 
         private void SaveAdditionalExpenseExecuteMethod()
         {
-            SelectedProduct.addExpense(new AdditionalExpense()
+            SelectedProduct.AddExpense(new AdditionalExpense()
             {
                 Name = AdditionalExpenseName,
                 Amount = _expenseAmount,
                 PricePercentage = _pricePercentage
             }) ;
+        }
+        private void RemoveAdditionalExpenseExecuteMethod()
+        {
+            SelectedProduct.RemoveExpense(SelectedExpense);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

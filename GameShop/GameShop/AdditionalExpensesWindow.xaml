@@ -40,6 +40,7 @@
                         </ControlTemplate>
                     </Validation.ErrorTemplate>
                 </TextBox>
+                
             </StackPanel>
 
             <StackPanel Orientation ="Horizontal" Margin="0,20,0,20">
@@ -82,37 +83,35 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
             </StackPanel>
-            
+
+            <Button x:Name="SaveButton" Width="90" Height="30" Margin="30" Content="Sačuvaj" Command="{Binding SaveAdditionalExpenseCommand}" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled" Value="false" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=ExpenseName, Path=(Validation.HasError)}" Value="false" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="true" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+
         </StackPanel>
 
 
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="20">
+            <ListBox FontSize="14" Height="300" Width="150" ItemsSource="{Binding SelectedProduct.AdditionalExpenses}" SelectedItem="{Binding SelectedExpense}">
 
-        <ListBox Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Margin="0,20,20,0" FontSize="14" Height="300" Width="150" ItemsSource="{Binding SelectedProduct.AdditionalExpenses}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
         </ListBox>
-        
-        
-        
+        <Button Margin="20" x:Name="DeleteButton" Width="90" Height="30" Content="Obriši" Command="{Binding RemoveAdditionalExpenseCommand}"></Button>
+        </StackPanel>
 
-        <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="SaveButton" Width="90" Height="30" Content="Sačuvaj" Command="{Binding SaveAdditionalExpenseCommand}" >
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="IsEnabled" Value="false" />
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding ElementName=ExpenseName, Path=(Validation.HasError)}" Value="false" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="IsEnabled" Value="true" />
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
 
+        
     </Grid>
 </Window>
