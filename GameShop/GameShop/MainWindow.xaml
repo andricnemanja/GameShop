@@ -10,6 +10,7 @@
     <Window.Resources>
         <converters:DiscountAmountConverter x:Key="DiscountAmountConverter" />
         <converters:TaxAmountConverter x:Key="TaxAmountConverter" />
+        <converters:ExpensesAmountConverter x:Key="ExpensesAmountConverter" />
     </Window.Resources>
     
     <Window.DataContext>
@@ -36,7 +37,7 @@
                 <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount, Converter={StaticResource TaxAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Ukupan popust" Binding="{Binding TotalDiscount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding AdditionalExpensesAmount}" Width ="*" IsReadOnly="True" >
+                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding AdditionalExpensesAmount, Converter={StaticResource ExpensesAmountConverter}}" Width ="*" IsReadOnly="True" >
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="ToolTip">
