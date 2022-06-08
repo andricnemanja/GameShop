@@ -59,9 +59,6 @@ namespace GameShop
             }
         }
 
-
-
-
         public MainWindowCommands()
         {
             productDatabase = new ProductDatabase(PRODUCTS_JSON) { Tax = 20, Discount = 0 };

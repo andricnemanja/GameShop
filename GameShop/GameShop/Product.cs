@@ -66,6 +66,20 @@ namespace GameShop
             }
         }
 
+        private double _discount;
+        public double Discount
+        {
+            get { return _discount; }
+            set 
+            {
+                if (_discount != value)
+                {
+                    _discount = value;
+                    RaisePropertyChanged("Discount");
+                }
+            }
+        }
+
         private double _discountAmount;
         public double DiscountAmount
         {
@@ -181,14 +195,15 @@ namespace GameShop
         public void Update(double newTax, double newDiscount)
         {
             Tax = newTax;
-            DiscountAmount = Math.Round(Price * newDiscount / 100, 2);
+            Discount = newDiscount;
+            DiscountAmount = CalculateDiscountAmount();
             TaxAmount = CalculateTaxAmount();
-            FinalPrice = Math.Round(Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount, 2);
+            FinalPrice = CalculateFinalPrice();
+
+            TotalDiscount = DiscountAmount + AdditionalDiscountAmount;
 
             if (FinalPrice < 0) 
                 FinalPrice = 0;
-
-            TotalDiscount = DiscountAmount + AdditionalDiscountAmount;
 
             if(DiscountAmount > Price + TaxAmount) 
                 DiscountAmount = Price + TaxAmount;
@@ -197,18 +212,29 @@ namespace GameShop
         public void UpdateAdditionalDiscount(double additionalDiscount)
         {
             AdditionalDiscountAmount = Math.Round(Price * additionalDiscount / 100, 2);
-            TotalDiscount = DiscountAmount + AdditionalDiscountAmount;
-            TaxAmount = CalculateTaxAmount();
-            FinalPrice = Math.Round(Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount, 2);
+            Update(Tax, Discount);
         }
 
         private double CalculateTaxAmount()
         {
             if (AdditionalDiscountBeforeTax)
                 return Math.Round((Price - AdditionalDiscountAmount) * Tax / 100, 2);
-
             return Math.Round(Price * Tax / 100, 2);
             
+        }
+
+        private double CalculateFinalPrice()
+        {
+            if (AdditionalDiscountBeforeTax)
+                Math.Round(Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount, 2);
+            return Math.Round(Price + TaxAmount - DiscountAmount - AdditionalDiscountAmount, 2);
+        }
+
+        private double CalculateDiscountAmount()
+        {
+            if(AdditionalDiscountBeforeTax)
+                return Math.Round((Price-AdditionalDiscountAmount) * Discount / 100, 2);
+            return Math.Round(Price * Discount / 100, 2);
         }
 
 
