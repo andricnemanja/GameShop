@@ -71,6 +71,8 @@ namespace GameShop
         }
         private void RemoveAdditionalExpenseExecuteMethod()
         {
+            if (SelectedExpense == null)
+                return;
             SelectedProduct.RemoveExpense(SelectedExpense);
         }
 
