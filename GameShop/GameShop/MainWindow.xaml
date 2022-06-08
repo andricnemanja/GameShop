@@ -41,8 +41,7 @@
                         <Style TargetType="DataGridCell">
                             <Setter Property="ToolTip">
                                 <Setter.Value>
-                                    <ListBox FontSize="14" Height="100" Width="150" ItemsSource="{Binding AdditionalExpenses}">
-                                        
+                                    <ListBox FontSize="14" Height="100" Width="150" ItemsSource="{Binding AdditionalExpenses}" Background="Transparent" BorderThickness="0">
                                     </ListBox>
                                 </Setter.Value>
                             </Setter>

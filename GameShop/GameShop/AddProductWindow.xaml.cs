@@ -47,6 +47,7 @@ namespace GameShop
             });
             ProductDatabase.Tax = tax;
             ProductDatabase.Discount = discount;
+            ProductDatabase.Serialize();
             this.Close();
         }
     }

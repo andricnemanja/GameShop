@@ -82,6 +82,7 @@ namespace GameShop
         private void RemoveProductExecuteMethod()
         {
             ProductDatabase.Products.Remove(SelectedProduct);
+            productDatabase.Serialize();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

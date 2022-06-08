@@ -160,8 +160,11 @@ namespace GameShop
             get { return _additionalExpensesAmount; }
             set 
             { 
-                _additionalExpensesAmount = value;
-                RaisePropertyChanged("AdditionalExpensesAmount");
+                if(_additionalExpensesAmount != value)
+                {
+                    _additionalExpensesAmount = value;
+                    RaisePropertyChanged("AdditionalExpensesAmount");
+                }
             }
         }
 

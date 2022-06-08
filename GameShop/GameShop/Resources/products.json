@@ -10,7 +10,8 @@
     "AdditionalDiscountAmount": 500,
     "TotalDiscount": 500,
     "AdditionalDiscountBeforeTax": false,
-    "DiscountBeforeTax": false
+    "AdditionalExpenses": [],
+    "AdditionalExpensesAmount": 0
   },
   {
     "Name": "Pro Evolution Soccer 2022",
@@ -23,6 +24,21 @@
     "AdditionalDiscountAmount": 0,
     "TotalDiscount": 0,
     "AdditionalDiscountBeforeTax": false,
-    "DiscountBeforeTax": false
+    "AdditionalExpenses": [],
+    "AdditionalExpensesAmount": 0
+  },
+  {
+    "Name": "\u201CFriends Forest House\u201D",
+    "UPC": 41679,
+    "Price": 20.25,
+    "FinalPrice": 24.3,
+    "DiscountAmount": 0,
+    "Tax": 20,
+    "TaxAmount": 4.05,
+    "AdditionalDiscountAmount": 0,
+    "TotalDiscount": 0,
+    "AdditionalDiscountBeforeTax": false,
+    "AdditionalExpenses": [],
+    "AdditionalExpensesAmount": 0
   }
 ]
