@@ -260,13 +260,13 @@ namespace GameShop
         {
             if (newAdditionalExpense.Amount != 0)
             {
-                FinalPrice += newAdditionalExpense.Amount;
-                AdditionalExpensesAmount += newAdditionalExpense.Amount;
+                FinalPrice = Math.Round(FinalPrice + newAdditionalExpense.Amount, 2);
+                AdditionalExpensesAmount = Math.Round(AdditionalExpensesAmount + newAdditionalExpense.Amount, 2);
                 return;
             }
             double newAdditionalExpenseAmount = Math.Round(Price * newAdditionalExpense.PricePercentage / 100, 2);
-            FinalPrice += newAdditionalExpenseAmount;
-            AdditionalExpensesAmount += newAdditionalExpenseAmount;
+            FinalPrice = Math.Round(FinalPrice + newAdditionalExpenseAmount, 2);
+            AdditionalExpensesAmount = Math.Round(AdditionalExpensesAmount + newAdditionalExpenseAmount, 2);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
