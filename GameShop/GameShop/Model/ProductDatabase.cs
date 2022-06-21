@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameShop.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace GameShop
     public class ProductDatabase
     {
         public static ObservableCollection<Product> Products { get; set; }
+        public ObservableCollection<ProductPrice> ProductPricesList { get; set; }
         private string serializationFileName;
         private double _tax;
         public double Tax

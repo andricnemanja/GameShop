@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GameShop
 {
@@ -16,7 +17,7 @@ namespace GameShop
         private ProductDatabase productDatabase;
     
         public Product SelectedProduct { get; set; }
-        public BaseCommand AddProductCommand { get; set; }
+        public ICommand AddProductCommand { get; set; }
         public BaseCommand RemoveProductCommand { get; set; }
         public BaseCommand AdditionalDiscountCommand { get; set; }
         public BaseCommand AdditionalExpenseCommand { get; set; }
@@ -64,16 +65,10 @@ namespace GameShop
             productDatabase = new ProductDatabase(PRODUCTS_JSON) { Tax = 20, Discount = 0 };
             productDatabase.Deserialize();
             Products = ProductDatabase.Products;
-            AddProductCommand = new BaseCommand(AddProductExecuteMethod);
+            AddProductCommand = new AddProductCommand(productDatabase, Tax, Discount);
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);
             AdditionalDiscountCommand = new BaseCommand(AdditionalDiscountExecuteMethod);
             AdditionalExpenseCommand = new BaseCommand(AdditionalExpenseExecuteMethod);
-        }
-
-        private void AddProductExecuteMethod()
-        {
-            AddProductWindow addProductWindow = new AddProductWindow(productDatabase, Tax, Discount);
-            addProductWindow.ShowDialog();
         }
 
         private void RemoveProductExecuteMethod()
