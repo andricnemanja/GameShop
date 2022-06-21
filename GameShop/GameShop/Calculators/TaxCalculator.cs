@@ -31,7 +31,7 @@ namespace GameShop.Calculators
 
         public double Calculate(ProductPrice productPrice)
         {
-            return productPrice.Product.Price * Tax;
+            return productPrice.Product.Price * Tax / 100;
         }
     }
 }

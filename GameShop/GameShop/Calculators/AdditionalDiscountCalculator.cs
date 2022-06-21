@@ -12,7 +12,7 @@ namespace GameShop.Calculators
         public int Percentage { get; set; }
         public double Calculate(ProductPrice productPrice)
         {
-            return -productPrice.Product.Price * Percentage;
+            return -productPrice.Product.Price * Percentage / 100;
         }
     }
 }

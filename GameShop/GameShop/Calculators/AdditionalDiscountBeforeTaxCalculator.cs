@@ -18,7 +18,7 @@ namespace GameShop.Calculators
         }
         public double Calculate(ProductPrice productPrice)
         {
-            return  - (productPrice.Product.Price + TaxCalculator.Calculate(productPrice)) * Percentage;
+            return  - (productPrice.Product.Price + TaxCalculator.Calculate(productPrice)) * Percentage / 100;
         }
     }
 }
