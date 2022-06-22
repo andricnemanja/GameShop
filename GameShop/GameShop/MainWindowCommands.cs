@@ -1,4 +1,6 @@
-﻿using GameShop.Commands;
+﻿using GameShop.Calculators;
+using GameShop.Commands;
+using GameShop.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +16,7 @@ namespace GameShop
     {
         private static string PRODUCTS_JSON = @".\..\..\..\Resources\products.json";
         public ObservableCollection<Product> Products { get; set; }
+        public ObservableCollection<ProductPrice> ProductPricesList{ get; set; }
         private ProductDatabase productDatabase;
     
         public Product SelectedProduct { get; set; }
@@ -35,7 +38,8 @@ namespace GameShop
                 }
                 else
                 {
-                    productDatabase.Tax = _tax;
+                    TaxCalculator.Instance.Tax = _tax;
+                    productDatabase.UpdatePrices();
                 }
                 
             }
@@ -54,7 +58,8 @@ namespace GameShop
                 }
                 else
                 {
-                    productDatabase.Discount = _discount;
+                    DiscountCalculator.Instance.Discount = _discount;
+                    productDatabase.UpdatePrices();
                 }
 
             }
@@ -62,10 +67,12 @@ namespace GameShop
 
         public MainWindowCommands()
         {
-            productDatabase = new ProductDatabase(PRODUCTS_JSON) { Tax = 20, Discount = 0 };
+            productDatabase = new ProductDatabase(PRODUCTS_JSON);
             productDatabase.Deserialize();
             Products = ProductDatabase.Products;
-            AddProductCommand = new AddProductCommand(productDatabase, Tax, Discount);
+            ProductPricesList = productDatabase.ProductPricesList;
+
+            AddProductCommand = new AddProductCommand(productDatabase);
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);
             AdditionalDiscountCommand = new BaseCommand(AdditionalDiscountExecuteMethod);
             AdditionalExpenseCommand = new BaseCommand(AdditionalExpenseExecuteMethod);

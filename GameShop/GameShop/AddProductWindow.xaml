@@ -74,7 +74,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <Button Content="Sačuvaj" Grid.Row="3" Grid.ColumnSpan="2" x:Name="SaveButton" Width="90" Height="35" Click="SaveButton_Click">
+        <Button Content="Sačuvaj" Grid.Row="3" Grid.ColumnSpan="2" x:Name="SaveButton" Width="90" Height="35" Command="{Binding SaveProductCommand}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="false" />

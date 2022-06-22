@@ -30,11 +30,11 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
-        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding SelectedProduct}">
+        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding ProductPricesList}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding SelectedProduct}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
+                <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding Product.UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Product.Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Product.Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount, Converter={StaticResource TaxAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Ukupan popust" Binding="{Binding TotalDiscount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding AdditionalExpensesAmount, Converter={StaticResource ExpensesAmountConverter}}" Width ="*" IsReadOnly="True" >

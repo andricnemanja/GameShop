@@ -12,14 +12,10 @@ namespace GameShop.Commands
         public event EventHandler CanExecuteChanged;
 
         private ProductDatabase productDatabase;
-        private double tax;
-        private double discount;
 
-        public AddProductCommand(ProductDatabase productDatabase, double tax, double discount)
+        public AddProductCommand(ProductDatabase productDatabase)
         {
             this.productDatabase = productDatabase;
-            this.tax = tax;
-            this.discount = discount;
         }
 
 
@@ -30,7 +26,7 @@ namespace GameShop.Commands
 
         public void Execute(object parameter)
         {
-            AddProductWindow addProductWindow = new AddProductWindow(productDatabase, tax, discount);
+            AddProductWindow addProductWindow = new AddProductWindow(productDatabase);
             addProductWindow.ShowDialog();
         }
     }

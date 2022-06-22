@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameShop.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,35 +21,11 @@ namespace GameShop
     /// </summary>
     public partial class AddProductWindow : Window
     {
-        public ProductDatabase ProductDatabase { get; set; }
-        private double tax;
-        private double discount;
-
-        public string ProductName { get; set; }
-        public int UPC { get; set; }
-        public double Price { get; set; }
-
-        public AddProductWindow(ProductDatabase database, double productTax, double productDiscount)
+        public AddProductWindow(ProductDatabase database)
         {
             InitializeComponent();
-            this.DataContext = this;
-            ProductDatabase = database;
-            tax = productTax;
-            discount = productDiscount;
+            this.DataContext = new AddProductViewModel(database);
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            ProductDatabase.AddProduct(new Product
-            {
-                Name = ProductName,
-                Price = Price,
-                UPC = UPC,
-            });
-            ProductDatabase.Tax = tax;
-            ProductDatabase.Discount = discount;
-            ProductDatabase.Serialize();
-            this.Close();
-        }
     }
 }

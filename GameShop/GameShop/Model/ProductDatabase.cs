@@ -1,4 +1,5 @@
-﻿using GameShop.Model;
+﻿using GameShop.Calculators;
+using GameShop.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,46 +17,23 @@ namespace GameShop
         public static ObservableCollection<Product> Products { get; set; }
         public ObservableCollection<ProductPrice> ProductPricesList { get; set; }
         private string serializationFileName;
-        private double _tax;
-        public double Tax
-        {
-            get { return _tax; }
-            set
-            {
-                _tax = value;
-                foreach (Product product in Products)
-                {
-                    product.Update(_tax, _discount);
-                }
-
-            }
-        }
-
-        private double _discount;
-
-        public double Discount
-        {
-            get { return _discount; }
-            set 
-            {      
-                _discount = value;
-                foreach (Product product in Products)
-                {
-                    product.Update(_tax, _discount);
-                }                
-            }
-        }
-
-
+        
         public ProductDatabase(string fileName)
         {
             Products = new();
+            ProductPricesList = new ObservableCollection<ProductPrice>();
             serializationFileName = fileName;
         }
 
         public void AddProduct(Product product)
         {
             Products.Add(product);
+        }
+
+        public void UpdatePrices()
+        {
+            foreach (ProductPrice productPrice in ProductPricesList)
+                productPrice.CalculateFinalPrice();
         }
 
         public static bool IsUPCUnique(int UPC)
@@ -79,6 +57,13 @@ namespace GameShop
         {
             string jsonString = File.ReadAllText(serializationFileName);
             Products = JsonSerializer.Deserialize<ObservableCollection<Product>>(jsonString);
+            foreach(Product product in Products)
+            {
+                ProductPrice productPrice = new ProductPrice(product);
+                productPrice.Calculators.Add(TaxCalculator.Instance);
+                productPrice.Calculators.Add(DiscountCalculator.Instance);
+                ProductPricesList.Add(productPrice);
+            }
         }
     }
 }
