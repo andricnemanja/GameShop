@@ -34,10 +34,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding Product.UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Product.Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Product.Price}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding TaxAmount, Converter={StaticResource TaxAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Ukupan popust" Binding="{Binding TotalDiscount, Converter={StaticResource DiscountAmountConverter}}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding AdditionalExpensesAmount, Converter={StaticResource ExpensesAmountConverter}}" Width ="*" IsReadOnly="True" >
+                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Product.Price, StringFormat=N2}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding PriceDetails.TaxAmount, Converter={StaticResource TaxAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Ukupan popust" Binding="{Binding PriceDetails.DiscountAmount, Converter={StaticResource DiscountAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding AdditionalExpensesAmount, Converter={StaticResource ExpensesAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" >
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="ToolTip">
@@ -49,7 +49,7 @@
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">

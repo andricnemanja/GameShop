@@ -15,7 +15,7 @@ namespace GameShop.Converters
             double amount = (double)value;
             if (amount == 0)
                 return "Nema popusta";
-            return amount.ToString();
+            return amount;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

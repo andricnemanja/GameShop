@@ -11,6 +11,8 @@ namespace GameShop.Model
     public class ProductPrice : INotifyPropertyChanged
     {
         public Product Product { get; set; }
+        public PriceDetails PriceDetails { get; set; }
+
         public List<ICalculator> Calculators { get; set; }
 
         private double _finalPrice;
@@ -34,16 +36,19 @@ namespace GameShop.Model
             Product = product;
             Calculators = new List<ICalculator>();
             FinalPrice = product.Price;
+            PriceDetails = new PriceDetails(this);
         }
 
 
         public double CalculateFinalPrice()
         {
             FinalPrice = Product.Price;
+            PriceDetails.Reset();
 
             foreach (ICalculator calculator in Calculators)
             {
                 FinalPrice += calculator.Calculate(this);
+                PriceDetails.CalculatePriceDetails(calculator);
             }
 
             return FinalPrice;
