@@ -30,7 +30,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
-        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding ProductPricesList}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding SelectedProduct}">
+        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding ProductPricesList}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding AdditionalDiscountCommand.SelectedProductPrice}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding Product.UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Product.Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>

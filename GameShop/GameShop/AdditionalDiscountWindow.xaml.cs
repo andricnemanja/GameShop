@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GameShop.Model;
+using GameShop.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,24 +22,10 @@ namespace GameShop
     /// </summary>
     public partial class AdditionalDiscountWindow : Window
     {
-        public double Discount { get; set; }
-        private List<Product> products;
-        public AdditionalDiscountWindow(List<Product> selectedProducts )
+        public AdditionalDiscountWindow(ProductPrice selectedProductPrice)
         {
-            products = selectedProducts;
             InitializeComponent();
-            this.DataContext = this;
-            
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            foreach(Product product in products)
-            {
-                product.AdditionalDiscountBeforeTax = (bool)DiscountBeforeTaxCheckBox.IsChecked;
-                product.UpdateAdditionalDiscount(Discount);
-            }
-            this.Close();
+            this.DataContext = new AdditionalDiscountViewModel(selectedProductPrice, this);
         }
     }
 }

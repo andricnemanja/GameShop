@@ -21,7 +21,7 @@
             <TextBlock Text="Dodatni popust:"/>
             <TextBox x:Name="AdditionalDiscountTextBox" Width="105" Margin="10,0,0,0">
                 <TextBox.Text>
-                    <Binding Path="Discount" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{##.##}}" >
+                    <Binding Path="SaveAdditionalDiscountCommand.DiscountPercentage" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{##.##}}" >
                         <Binding.ValidationRules>
                             <val:TextBoxNotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
                             <val:AdditionalDiscountValidationRule ValidatesOnTargetUpdated="True"/>
@@ -39,10 +39,10 @@
             </TextBox>
         </StackPanel>
 
-        <CheckBox Grid.Row="1" x:Name="DiscountBeforeTaxCheckBox" Content="Primeni popust pre poreza" Margin="0,20,0,30"/>
+        <CheckBox Grid.Row="1" x:Name="DiscountBeforeTaxCheckBox" Content="Primeni popust pre poreza" Margin="0,20,0,30" IsChecked="{Binding SaveAdditionalDiscountCommand.DiscountBeforeTax}"/>
 
 
-        <Button Grid.Row="2" x:Name="SaveButton" Width="90" Height="30" Content="Sačuvaj" Click="SaveButton_Click">
+        <Button Grid.Row="2" x:Name="SaveButton" Width="90" Height="30" Content="Sačuvaj" Command="{Binding SaveAdditionalDiscountCommand}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="false" />

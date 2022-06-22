@@ -9,12 +9,13 @@ namespace GameShop.Calculators
 {
     public class AdditionalDiscountBeforeTaxCalculator : ICalculator
     {
-        public int Percentage { get; set; }
+        public double Percentage { get; set; }
         public TaxCalculator TaxCalculator { get; set; }
 
-        public AdditionalDiscountBeforeTaxCalculator(TaxCalculator taxCalculator)
+        public AdditionalDiscountBeforeTaxCalculator(TaxCalculator taxCalculator, double percentage)
         {
             TaxCalculator = taxCalculator;
+            Percentage = percentage;
         }
         public double Calculate(ProductPrice productPrice)
         {

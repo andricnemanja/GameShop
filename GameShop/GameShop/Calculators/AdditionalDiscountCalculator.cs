@@ -9,7 +9,13 @@ namespace GameShop.Calculators
 {
     public class AdditionalDiscountCalculator : ICalculator
     {
-        public int Percentage { get; set; }
+        public double Percentage { get; set; }
+
+        public AdditionalDiscountCalculator(double percentage)
+        {
+            Percentage = percentage;
+        }
+
         public double Calculate(ProductPrice productPrice)
         {
             return -productPrice.Product.Price * Percentage / 100;

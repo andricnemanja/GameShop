@@ -19,10 +19,10 @@ namespace GameShop
         public ObservableCollection<ProductPrice> ProductPricesList{ get; set; }
         private ProductDatabase productDatabase;
     
-        public Product SelectedProduct { get; set; }
+        public ProductPrice SelectedProductPrice { get; set; }
         public ICommand AddProductCommand { get; set; }
         public BaseCommand RemoveProductCommand { get; set; }
-        public BaseCommand AdditionalDiscountCommand { get; set; }
+        public ICommand AdditionalDiscountCommand { get; set; }
         public BaseCommand AdditionalExpenseCommand { get; set; }
 
         private double _tax = 20;
@@ -74,14 +74,18 @@ namespace GameShop
 
             AddProductCommand = new AddProductCommand(productDatabase);
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);
-            AdditionalDiscountCommand = new BaseCommand(AdditionalDiscountExecuteMethod);
+            AdditionalDiscountCommand = new AddAdditionalDiscountCommand(GetSelectedPrice());
             AdditionalExpenseCommand = new BaseCommand(AdditionalExpenseExecuteMethod);
         }
 
         private void RemoveProductExecuteMethod()
         {
-            ProductDatabase.Products.Remove(SelectedProduct);
             productDatabase.Serialize();
+        }
+
+        private ProductPrice GetSelectedPrice()
+        {
+            return SelectedProductPrice;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -89,33 +93,10 @@ namespace GameShop
             productDatabase.Serialize();
         }
 
-
-        private void AdditionalDiscountExecuteMethod()
-        {
-            List<Product> selectedProducts = GetSelectedProducts();
-
-            if (selectedProducts.Count == 0)
-            {
-                AdditionalDiscount additionalDiscount = new AdditionalDiscount(productDatabase);
-                additionalDiscount.ShowDialog();
-                return;
-            }
-
-            AdditionalDiscountWindow additionalDiscountWindow = new AdditionalDiscountWindow(selectedProducts);
-            additionalDiscountWindow.ShowDialog();
-        }
-
-        private List<Product> GetSelectedProducts()
-        {
-            List<Product> selectedProducts = new List<Product>();
-            selectedProducts.Add(SelectedProduct);
-            return selectedProducts;
-        }
-
         private void AdditionalExpenseExecuteMethod()
         {
-            AdditionalExpensesWindow additionalExpensesWindow = new AdditionalExpensesWindow(SelectedProduct);
-            additionalExpensesWindow.ShowDialog();
+            //AdditionalExpensesWindow additionalExpensesWindow = new AdditionalExpensesWindow(SelectedProduct);
+            //additionalExpensesWindow.ShowDialog();
         }
 
 
