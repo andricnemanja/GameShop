@@ -18,7 +18,7 @@ namespace GameShop.Calculators
             get
             {
                 if (_instance == null)
-                    return new DiscountCalculator();
+                    _instance = new DiscountCalculator();
                 return _instance;
             }
         }
