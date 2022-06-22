@@ -1,16 +1,28 @@
-﻿using GameShop.Commands;
+﻿using GameShop.Calculators;
+using GameShop.Commands;
+using GameShop.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GameShop
 {
     public class AdditionalExpenseWindowCommands : INotifyPropertyChanged
     {
-        public string AdditionalExpenseName { get; set; }
+        private string _additionalExpenseName;
+        public string AdditionalExpenseName
+        {
+            get { return _additionalExpenseName; }
+            set 
+            { 
+                _additionalExpenseName = value;
+                SaveAdditionalExpenseCommand.ExpenseName = value;
+            }
+        }
 
         private double _pricePercentage = 0;
         public double PricePercentage
@@ -24,6 +36,8 @@ namespace GameShop
                     _expenseAmount = 0;
                     RaisePropertyChanged("PricePercentage");
                     RaisePropertyChanged("ExpenseAmount");
+                    SaveAdditionalExpenseCommand.PricePercentage = value;
+                    SaveAdditionalExpenseCommand.ExpenseAmount = 0; ;
                 }
             }
         }
@@ -40,40 +54,35 @@ namespace GameShop
                     _pricePercentage = 0;
                     RaisePropertyChanged("PricePercentage");
                     RaisePropertyChanged("ExpenseAmount");
+                    SaveAdditionalExpenseCommand.ExpenseAmount = value; ;
+                    SaveAdditionalExpenseCommand.PricePercentage = 0;
                 }
             }
         }
 
-        public Product SelectedProduct { get; set; }
+        public ProductPrice SelectedProductPrice { get; set; }
 
-        public AdditionalExpense SelectedExpense { get; set; }
+        private AdditionalExpenseCalculator _selectedAdditionalExpense;
 
-        public BaseCommand SaveAdditionalExpenseCommand { get; set; }
-        public BaseCommand RemoveAdditionalExpenseCommand { get; set; }
-
-
-        public AdditionalExpenseWindowCommands(Product selectedProduct)
+        public AdditionalExpenseCalculator SelectedAdditionalExpense
         {
-            SelectedProduct = selectedProduct;
-            SaveAdditionalExpenseCommand = new BaseCommand(SaveAdditionalExpenseExecuteMethod);
-            RemoveAdditionalExpenseCommand = new BaseCommand(RemoveAdditionalExpenseExecuteMethod);
-        }
-
-
-        private void SaveAdditionalExpenseExecuteMethod()
-        {
-            SelectedProduct.AddExpense(new AdditionalExpense()
+            get { return _selectedAdditionalExpense; }
+            set 
             {
-                Name = AdditionalExpenseName,
-                Amount = _expenseAmount,
-                PricePercentage = _pricePercentage
-            }) ;
+                _selectedAdditionalExpense = value;
+                RemoveAdditionalExpenseCommand.SelectedExpense = value;
+            }
         }
-        private void RemoveAdditionalExpenseExecuteMethod()
+
+        public SaveAdditionalExpenseCommand SaveAdditionalExpenseCommand { get; set; }
+        public RemoveAdditionalExpenseCommand RemoveAdditionalExpenseCommand { get; set; }
+
+
+        public AdditionalExpenseWindowCommands(ProductPrice selectedProductPrice)
         {
-            if (SelectedExpense == null)
-                return;
-            SelectedProduct.RemoveExpense(SelectedExpense);
+            SelectedProductPrice = selectedProductPrice;
+            SaveAdditionalExpenseCommand = new SaveAdditionalExpenseCommand(selectedProductPrice);
+            RemoveAdditionalExpenseCommand = new RemoveAdditionalExpenseCommand(selectedProductPrice);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

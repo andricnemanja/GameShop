@@ -30,19 +30,19 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
-        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding ProductPricesList}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding AdditionalDiscountCommand.SelectedProductPrice}">
+        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding ProductPricesList}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding SelectedProductPrice}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding Product.UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Product.Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
                 <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Product.Price, StringFormat=N2}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Iznos poreza" Binding="{Binding PriceDetails.TaxAmount, Converter={StaticResource TaxAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Ukupan popust" Binding="{Binding PriceDetails.DiscountAmount, Converter={StaticResource DiscountAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding AdditionalExpensesAmount, Converter={StaticResource ExpensesAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" >
+                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding PriceDetails.ExpensesAmount, Converter={StaticResource ExpensesAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" >
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="ToolTip">
                                 <Setter.Value>
-                                    <ListBox FontSize="14" Height="100" Width="150" ItemsSource="{Binding AdditionalExpenses}" Background="Transparent" BorderThickness="0">
+                                    <ListBox FontSize="14" Height="100" Width="150" ItemsSource="{Binding PriceDetails.AdditionalExpenses}" Background="Transparent" BorderThickness="0">
                                     </ListBox>
                                 </Setter.Value>
                             </Setter>

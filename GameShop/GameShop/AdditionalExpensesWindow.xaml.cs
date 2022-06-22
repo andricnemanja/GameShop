@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameShop.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace GameShop
     /// </summary>
     public partial class AdditionalExpensesWindow : Window
     {
-        public AdditionalExpensesWindow(Product selectedProduct)
+        public AdditionalExpensesWindow(ProductPrice selectedProductPrice)
         {
             InitializeComponent();
-            this.DataContext = new AdditionalExpenseWindowCommands(selectedProduct);
+            this.DataContext = new AdditionalExpenseWindowCommands(selectedProductPrice);
         }
     }
 }

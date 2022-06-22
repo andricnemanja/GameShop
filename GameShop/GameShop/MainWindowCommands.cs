@@ -15,15 +15,25 @@ namespace GameShop
     public class MainWindowCommands
     {
         private static string PRODUCTS_JSON = @".\..\..\..\Resources\products.json";
-        public ObservableCollection<Product> Products { get; set; }
         public ObservableCollection<ProductPrice> ProductPricesList{ get; set; }
         private ProductDatabase productDatabase;
-    
-        public ProductPrice SelectedProductPrice { get; set; }
+
+        private ProductPrice _selectedProductPrice;
+        public ProductPrice SelectedProductPrice
+        {
+            get { return _selectedProductPrice; }
+            set 
+            { 
+                _selectedProductPrice = value;
+                ((AddAdditionalDiscountCommand)AdditionalDiscountCommand).SelectedProductPrice = value;
+                ((AddAdditionalExpensesCommand)AdditionalExpenseCommand).SelectedProductPrice = value;
+            }
+        }
+
         public ICommand AddProductCommand { get; set; }
         public BaseCommand RemoveProductCommand { get; set; }
         public ICommand AdditionalDiscountCommand { get; set; }
-        public BaseCommand AdditionalExpenseCommand { get; set; }
+        public ICommand AdditionalExpenseCommand { get; set; }
 
         private double _tax = 20;
         public double Tax
@@ -69,13 +79,12 @@ namespace GameShop
         {
             productDatabase = new ProductDatabase(PRODUCTS_JSON);
             productDatabase.Deserialize();
-            Products = ProductDatabase.Products;
             ProductPricesList = productDatabase.ProductPricesList;
 
             AddProductCommand = new AddProductCommand(productDatabase);
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);
-            AdditionalDiscountCommand = new AddAdditionalDiscountCommand(GetSelectedPrice());
-            AdditionalExpenseCommand = new BaseCommand(AdditionalExpenseExecuteMethod);
+            AdditionalDiscountCommand = new AddAdditionalDiscountCommand();
+            AdditionalExpenseCommand = new AddAdditionalExpensesCommand();
         }
 
         private void RemoveProductExecuteMethod()
@@ -83,22 +92,9 @@ namespace GameShop
             productDatabase.Serialize();
         }
 
-        private ProductPrice GetSelectedPrice()
-        {
-            return SelectedProductPrice;
-        }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             productDatabase.Serialize();
         }
-
-        private void AdditionalExpenseExecuteMethod()
-        {
-            //AdditionalExpensesWindow additionalExpensesWindow = new AdditionalExpensesWindow(SelectedProduct);
-            //additionalExpensesWindow.ShowDialog();
-        }
-
-
     }
 }

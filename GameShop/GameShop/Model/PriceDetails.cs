@@ -1,6 +1,7 @@
 ﻿using GameShop.Calculators;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,22 @@ namespace GameShop.Model
             }
         }
 
+        private double _expensesAmount;
+        public double ExpensesAmount
+        {
+            get { return _expensesAmount; }
+            set 
+            {
+                if (_expensesAmount != value)
+                {
+                    _expensesAmount = value;
+                    RaisePropertyChanged("ExpensesAmount");
+                }
+            }
+        }
+
+        public ObservableCollection<AdditionalExpenseCalculator> AdditionalExpenses { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public PriceDetails(ProductPrice productPrice)
@@ -47,18 +64,23 @@ namespace GameShop.Model
             this.productPrice = productPrice;
             TaxAmount = 0;
             DiscountAmount = 0;
+            ExpensesAmount = 0;
+            AdditionalExpenses = new ObservableCollection<AdditionalExpenseCalculator>();
         }
 
         public void CalculatePriceDetails(ICalculator calculator)
         {
-            if(calculator is TaxCalculator)
-            {
+            if(calculator is TaxCalculator)   
                 TaxAmount += calculator.Calculate(productPrice);
-            }
             else if (calculator is DiscountCalculator || calculator is AdditionalDiscountCalculator
                 || calculator is AdditionalDiscountBeforeTaxCalculator)
             {
                 DiscountAmount += calculator.Calculate(productPrice);
+            }
+            else if(calculator is AdditionalExpenseCalculator)
+            {
+                ExpensesAmount += calculator.Calculate(productPrice);
+                AdditionalExpenses.Add(calculator as AdditionalExpenseCalculator);
             }
         }
 
@@ -66,6 +88,8 @@ namespace GameShop.Model
         {
             TaxAmount = 0;
             DiscountAmount = 0;
+            ExpensesAmount = 0;
+            AdditionalExpenses.Clear();
         }
 
         private void RaisePropertyChanged(string property)
