@@ -2,46 +2,16 @@
   {
     "Name": "Fifa 2022",
     "UPC": 1000,
-    "Price": 4999.99,
-    "FinalPrice": 5499.99,
-    "Discount": 0,
-    "DiscountAmount": 0,
-    "Tax": 20,
-    "TaxAmount": 1000,
-    "AdditionalDiscountAmount": 500,
-    "TotalDiscount": 500,
-    "AdditionalDiscountBeforeTax": false,
-    "AdditionalExpenses": [],
-    "AdditionalExpensesAmount": 0
+    "Price": 4999.99
   },
   {
     "Name": "Pro Evolution Soccer 2022",
     "UPC": 1001,
-    "Price": 3999.99,
-    "FinalPrice": 4799.99,
-    "Discount": 0,
-    "DiscountAmount": 0,
-    "Tax": 20,
-    "TaxAmount": 800,
-    "AdditionalDiscountAmount": 0,
-    "TotalDiscount": 0,
-    "AdditionalDiscountBeforeTax": false,
-    "AdditionalExpenses": [],
-    "AdditionalExpensesAmount": 0
+    "Price": 3999.99
   },
   {
-    "Name": "\u201CFriends Forest House\u201D",
+    "Name": "Friends Forest House",
     "UPC": 41679,
-    "Price": 20.25,
-    "FinalPrice": 24.3,
-    "Discount": 0,
-    "DiscountAmount": 0,
-    "Tax": 20,
-    "TaxAmount": 4.05,
-    "AdditionalDiscountAmount": 0,
-    "TotalDiscount": 0,
-    "AdditionalDiscountBeforeTax": false,
-    "AdditionalExpenses": [],
-    "AdditionalExpensesAmount": 0
+    "Price": 20.25
   }
 ]

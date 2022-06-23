@@ -143,11 +143,6 @@ namespace GameShop
             productDatabase.Serialize();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            productDatabase.Serialize();
-        }
-
         private void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)

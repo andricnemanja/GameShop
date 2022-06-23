@@ -14,15 +14,13 @@ namespace GameShop.Commands
         public event EventHandler CanExecuteChanged;
 
         private ProductDatabase productDatabase;
-        private string productName;
-        private int UPC;
-        private double price;
 
-        public SaveProductCommand(string productName, int uPC, double price, ProductDatabase productDatabase)
+        public string ProductName { get; set; }
+        public int UPC { get; set; }
+        public double Price { get; set; }
+
+        public SaveProductCommand(ProductDatabase productDatabase)
         {
-            this.productName = productName;
-            UPC = uPC;
-            this.price = price;
             this.productDatabase = productDatabase;
         }
 
@@ -35,8 +33,8 @@ namespace GameShop.Commands
         {
             Product newProduct = new Product()
             {
-                Name = productName,
-                Price = price,
+                Name = ProductName,
+                Price = Price,
                 UPC = UPC
             };
             ProductPrice productPrice = new ProductPrice(newProduct);
