@@ -7,20 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="AdditionalExpensesWindow.xaml.cs">
+    <Compile Update="View\AdditionalExpensesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="AdditionalDiscountWindow.xaml.cs">
+    <Compile Update="View\AdditionalDiscountWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="AdditionalExpensesWindow.xaml">
+    <Page Update="View\AdditionalExpensesWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="AdditionalDiscountWindow.xaml">
+    <Page Update="View\AdditionalDiscountWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

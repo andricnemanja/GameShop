@@ -14,7 +14,7 @@
     </Window.Resources>
     
     <Window.DataContext>
-        <local:MainWindowCommands/>
+        <local:MainWindowViewModel/>
     </Window.DataContext>
     
     

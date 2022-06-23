@@ -13,7 +13,7 @@ using System.Windows.Input;
 namespace GameShop
 {
 
-    public class MainWindowCommands : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         private static string PRODUCTS_JSON = @".\..\..\..\Resources\products.json";
         public ObservableCollection<ProductPrice> ProductPricesList{ get; set; }
@@ -116,7 +116,7 @@ namespace GameShop
         public ICommand AdditionalExpenseCommand { get; set; }
 
 
-        public MainWindowCommands()
+        public MainWindowViewModel()
         {
             productDatabase = new ProductDatabase(PRODUCTS_JSON);
             productDatabase.Deserialize();

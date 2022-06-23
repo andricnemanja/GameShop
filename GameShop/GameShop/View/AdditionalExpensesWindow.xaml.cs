@@ -24,7 +24,7 @@ namespace GameShop
         public AdditionalExpensesWindow(ProductPrice selectedProductPrice)
         {
             InitializeComponent();
-            this.DataContext = new AdditionalExpenseWindowCommands(selectedProductPrice);
+            this.DataContext = new AdditionalExpenseViewModel(selectedProductPrice);
         }
     }
 }

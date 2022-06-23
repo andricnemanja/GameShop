@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GameShop
 {
-    public class AdditionalExpenseWindowCommands : INotifyPropertyChanged
+    public class AdditionalExpenseViewModel : INotifyPropertyChanged
     {
         private string _additionalExpenseName;
         public string AdditionalExpenseName
@@ -78,7 +78,7 @@ namespace GameShop
         public RemoveAdditionalExpenseCommand RemoveAdditionalExpenseCommand { get; set; }
 
 
-        public AdditionalExpenseWindowCommands(ProductPrice selectedProductPrice)
+        public AdditionalExpenseViewModel(ProductPrice selectedProductPrice)
         {
             SelectedProductPrice = selectedProductPrice;
             SaveAdditionalExpenseCommand = new SaveAdditionalExpenseCommand(selectedProductPrice);
