@@ -35,7 +35,7 @@ namespace GameShop.Commands
         {
             ICalculator calculator;
             if (DiscountBeforeTax)
-                calculator = new AdditionalDiscountBeforeTaxCalculator(TaxCalculator.Instance, DiscountPercentage);
+                calculator = new AdditionalDiscountBeforeTaxCalculator(DiscountPercentage);
             else
                 calculator = new AdditionalDiscountCalculator(DiscountPercentage);
 

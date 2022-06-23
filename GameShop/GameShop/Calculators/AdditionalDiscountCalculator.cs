@@ -10,8 +10,6 @@ namespace GameShop.Calculators
     public class AdditionalDiscountCalculator : ICalculator
     {
         public double Percentage { get; set; }
-        public DiscountType DiscountType { get; set; }
-
         public AdditionalDiscountCalculator(double percentage)
         {
             Percentage = percentage;
@@ -19,7 +17,8 @@ namespace GameShop.Calculators
 
         public double Calculate(ProductPrice productPrice)
         {
-            if(DiscountType == DiscountType.ADDITIVE)
+            // Calculators[0] is TaxCalculator, Calculator[1] is DiscountCalculator
+            if (DiscountCalculationMethod.Instance.DiscountType == DiscountType.ADDITIVE)
                 return -productPrice.Product.Price * Percentage / 100;
 
             double priceWithRegularDiscount = productPrice.Product.Price + productPrice.Calculators[1].Calculate(productPrice);

@@ -131,9 +131,11 @@ namespace GameShop
         private void ChangeDiscountType()
         {
             if (_additiveDiscount == true)
-                productDatabase.ChangeDiscountType(DiscountType.ADDITIVE);
+                DiscountCalculationMethod.Instance.DiscountType = DiscountType.ADDITIVE;
             else
-                productDatabase.ChangeDiscountType(DiscountType.MULTIPLICATIVE);
+                DiscountCalculationMethod.Instance.DiscountType = DiscountType.MULTIPLICATIVE;
+
+            productDatabase.UpdatePrices();
         }
 
         private void RemoveProductExecuteMethod()

@@ -10,16 +10,21 @@ namespace GameShop.Calculators
     public class AdditionalDiscountBeforeTaxCalculator : ICalculator
     {
         public double Percentage { get; set; }
-        public TaxCalculator TaxCalculator { get; set; }
 
-        public AdditionalDiscountBeforeTaxCalculator(TaxCalculator taxCalculator, double percentage)
+        public AdditionalDiscountBeforeTaxCalculator(double percentage)
         {
-            TaxCalculator = taxCalculator;
             Percentage = percentage;
         }
         public double Calculate(ProductPrice productPrice)
         {
-            return  - (productPrice.Product.Price + TaxCalculator.Calculate(productPrice)) * Percentage / 100;
+            // Calculators[0] is TaxCalculator, Calculator[1] is DiscountCalculator
+            if (DiscountCalculationMethod.Instance.DiscountType == DiscountType.ADDITIVE)
+                return -(productPrice.Product.Price + productPrice.Calculators[0].Calculate(productPrice)) * Percentage / 100;
+
+            double tax = productPrice.Calculators[0].Calculate(productPrice);
+            double regularDiscount = productPrice.Calculators[1].Calculate(productPrice);
+
+            return -(productPrice.Product.Price + tax + regularDiscount) * Percentage / 100;
         }
     }
 }
