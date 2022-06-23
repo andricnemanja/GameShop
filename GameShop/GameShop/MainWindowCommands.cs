@@ -4,6 +4,7 @@ using GameShop.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 namespace GameShop
 {
 
-    public class MainWindowCommands
+    public class MainWindowCommands : INotifyPropertyChanged
     {
         private static string PRODUCTS_JSON = @".\..\..\..\Resources\products.json";
         public ObservableCollection<ProductPrice> ProductPricesList{ get; set; }
@@ -29,11 +30,6 @@ namespace GameShop
                 ((AddAdditionalExpensesCommand)AdditionalExpenseCommand).SelectedProductPrice = value;
             }
         }
-
-        public ICommand AddProductCommand { get; set; }
-        public BaseCommand RemoveProductCommand { get; set; }
-        public ICommand AdditionalDiscountCommand { get; set; }
-        public ICommand AdditionalExpenseCommand { get; set; }
 
         private double _tax = 20;
         public double Tax
@@ -75,6 +71,51 @@ namespace GameShop
             }
         }
 
+        private bool _additiveDiscount = true;
+        public bool AdditiveDiscount
+        {
+            get { return _additiveDiscount; }
+            set 
+            {
+                if (_additiveDiscount != value)
+                {
+                    _additiveDiscount = value;
+                    _multiplicativeDiscount = !value;
+                    RaisePropertyChanged("AdditiveDiscount");
+                    RaisePropertyChanged("MultiplicativeDiscount");
+
+                    ChangeDiscountType();
+                }
+            }
+        }
+
+        private bool _multiplicativeDiscount = false;
+        public bool MultiplicativeDiscount
+        {
+            get { return _multiplicativeDiscount; }
+            set 
+            {
+                if (_multiplicativeDiscount != value)
+                {
+                    _multiplicativeDiscount = value;
+                    _additiveDiscount = !value;
+                    RaisePropertyChanged("AdditiveDiscount");
+                    RaisePropertyChanged("MultiplicativeDiscount");
+
+                    ChangeDiscountType();
+                }
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand AddProductCommand { get; set; }
+        public BaseCommand RemoveProductCommand { get; set; }
+        public ICommand AdditionalDiscountCommand { get; set; }
+        public ICommand AdditionalExpenseCommand { get; set; }
+
+
         public MainWindowCommands()
         {
             productDatabase = new ProductDatabase(PRODUCTS_JSON);
@@ -87,6 +128,14 @@ namespace GameShop
             AdditionalExpenseCommand = new AddAdditionalExpensesCommand();
         }
 
+        private void ChangeDiscountType()
+        {
+            if (_additiveDiscount == true)
+                productDatabase.ChangeDiscountType(DiscountType.ADDITIVE);
+            else
+                productDatabase.ChangeDiscountType(DiscountType.MULTIPLICATIVE);
+        }
+
         private void RemoveProductExecuteMethod()
         {
             productDatabase.Serialize();
@@ -95,6 +144,14 @@ namespace GameShop
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             productDatabase.Serialize();
+        }
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
         }
     }
 }

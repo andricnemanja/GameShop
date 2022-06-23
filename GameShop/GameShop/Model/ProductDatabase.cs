@@ -25,6 +25,20 @@ namespace GameShop
             serializationFileName = fileName;
         }
 
+        public void ChangeDiscountType(DiscountType discountType)
+        {
+           foreach(ProductPrice price in ProductPricesList)
+            {
+                List<ICalculator> expenseCalculators = price.Calculators.Where(calc => calc is AdditionalDiscountCalculator).ToList();
+                if (expenseCalculators.Count == 0)
+                    continue;
+
+                AdditionalDiscountCalculator additionalDiscountCalculator = expenseCalculators[0] as AdditionalDiscountCalculator;
+                additionalDiscountCalculator.DiscountType = discountType;
+                price.CalculateFinalPrice();
+            }
+        }
+
         public void AddProduct(Product product)
         {
             Products.Add(product);

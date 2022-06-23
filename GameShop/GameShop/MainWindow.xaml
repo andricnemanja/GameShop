@@ -16,10 +16,14 @@
     <Window.DataContext>
         <local:MainWindowCommands/>
     </Window.DataContext>
+    
+    
+    
 
     <Grid>
         
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
@@ -29,8 +33,16 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
-        <DataGrid Grid.Row="1" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding ProductPricesList}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding SelectedProductPrice}">
+        <Menu Grid.Row="0">
+            <MenuItem Header="Opcije">
+                <MenuItem Header="Aditivni popust" IsCheckable="True" IsChecked="{Binding AdditiveDiscount}" />
+                <MenuItem Header="Multiplikativni" IsCheckable="True" IsChecked="{Binding MultiplicativeDiscount}" />
+            </MenuItem>
+        </Menu>
+
+
+        <Label Grid.Row="1" Content="Game Shop" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="60"/>
+        <DataGrid Grid.Row="2" x:Name="dataGrid" Margin="60,20,60,20" ItemsSource="{Binding ProductPricesList}" AutoGenerateColumns="False" CanUserAddRows="False" MouseDown="dataGrid_MouseDown" SelectedItem="{Binding SelectedProductPrice}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding Product.UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Product.Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
@@ -52,7 +64,7 @@
                 <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="60,0,60,30">
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="60,0,60,30">
             <Button Content="Dodaj proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AddProductCommand}"/>
             <Button Content="Obriši proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding RemoveProductCommand}"/>
             <Button Content="Dodatni popust" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AdditionalDiscountCommand}"/>
