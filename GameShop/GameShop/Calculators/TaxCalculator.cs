@@ -9,29 +9,11 @@ namespace GameShop.Calculators
 {
     public class TaxCalculator : ICalculator
     {
-        private double _tax;
+        public double Tax { get; set; }
 
-        public double Tax
+        public TaxCalculator(double tax)
         {
-            get { return _tax; }
-            set { _tax = value; }
-        }
-
-
-        private static TaxCalculator _instance = null;
-        public static TaxCalculator Instance
-        {
-            get 
-            {
-                if( _instance == null)
-                    _instance = new TaxCalculator();
-                return _instance; 
-            }
-        }
-
-        private TaxCalculator()
-        {
-            Tax = 20;
+            Tax = tax;
         }
 
         public double Calculate(ProductPrice productPrice)

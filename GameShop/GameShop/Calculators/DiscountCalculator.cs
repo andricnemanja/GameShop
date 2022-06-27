@@ -11,19 +11,7 @@ namespace GameShop.Calculators
     {
         public double Discount { get; set; }
 
-        private static DiscountCalculator _instance = null;
-
-        public static DiscountCalculator Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new DiscountCalculator();
-                return _instance;
-            }
-        }
-
-        public DiscountCalculator()
+        public DiscountCalculator(double discount)
         {
             Discount = 0;
         }

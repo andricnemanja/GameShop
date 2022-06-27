@@ -13,6 +13,13 @@ namespace GameShop.Calculators
         public double PricePercentage { get; set; }
         public double Amount { get; set; }
 
+        public AdditionalExpenseCalculator(string name, double pricePercentage, double amount)
+        {
+            Name = name;
+            PricePercentage = pricePercentage;
+            Amount = amount;
+        }
+
         public double Calculate(ProductPrice productPrice)
         {
             return productPrice.Product.Price * PricePercentage / 100 + Amount;
