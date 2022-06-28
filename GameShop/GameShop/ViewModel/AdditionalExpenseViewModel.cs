@@ -62,17 +62,6 @@ namespace GameShop
 
         public ProductPrice SelectedProductPrice { get; set; }
 
-        private AdditionalExpenseCalculator _selectedAdditionalExpense;
-
-        public AdditionalExpenseCalculator SelectedAdditionalExpense
-        {
-            get { return _selectedAdditionalExpense; }
-            set 
-            {
-                _selectedAdditionalExpense = value;
-                RemoveAdditionalExpenseCommand.SelectedExpense = value;
-            }
-        }
 
         public SaveAdditionalExpenseCommand SaveAdditionalExpenseCommand { get; set; }
         public RemoveAdditionalExpenseCommand RemoveAdditionalExpenseCommand { get; set; }

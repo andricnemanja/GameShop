@@ -36,8 +36,8 @@ namespace GameShop.Builder
 
             if (ProductSettings.AdditionalDiscoubtBeforeTax)
                 Calculators.Add(new AdditionalDiscountBeforeTaxCalculator(ProductSettings.AdditionalDiscount));
-
-            Calculators.Add(new AdditionalDiscountCalculator(ProductSettings.AdditionalDiscount));
+            else
+                Calculators.Add(new AdditionalDiscountCalculator(ProductSettings.AdditionalDiscount));
         }
 
         public void BuildAdditionalExpensesCalculator()

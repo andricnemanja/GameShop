@@ -1,5 +1,6 @@
 ﻿using GameShop.Calculators;
 using GameShop.Model;
+using GameShop.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +31,9 @@ namespace GameShop.Commands
 
         public void Execute(object parameter)
         {
-            selectedProductPrice.AddCalculator(new AdditionalExpenseCalculator()
-            {
-                Amount = ExpenseAmount,
-                PricePercentage = PricePercentage,
-                Name = ExpenseName
-            });
+            AdditionalExpense additionalExpense = new AdditionalExpense(ExpenseName, PricePercentage, ExpenseAmount);
+            selectedProductPrice.ProductSettings.AdditionalExpenses.Add(additionalExpense);
+            selectedProductPrice.CalculateFinalPrice();
         }
     }
 }

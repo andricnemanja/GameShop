@@ -1,6 +1,7 @@
 ﻿using GameShop.Calculators;
 using GameShop.Commands;
 using GameShop.Model;
+using GameShop.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,7 +45,7 @@ namespace GameShop
                 }
                 else
                 {
-                    TaxCalculator.Instance.Tax = _tax;
+                    GlobalSettings.Instance.Tax = _tax;
                     productDatabase.UpdatePrices();
                 }
                 
@@ -64,7 +65,7 @@ namespace GameShop
                 }
                 else
                 {
-                    DiscountCalculator.Instance.Discount = _discount;
+                    GlobalSettings.Instance.Discount = _discount;
                     productDatabase.UpdatePrices();
                 }
 
@@ -131,9 +132,9 @@ namespace GameShop
         private void ChangeDiscountType()
         {
             if (_additiveDiscount == true)
-                DiscountCalculationMethod.Instance.DiscountType = DiscountType.ADDITIVE;
+                GlobalSettings.Instance.DiscountType = DiscountType.ADDITIVE;
             else
-                DiscountCalculationMethod.Instance.DiscountType = DiscountType.MULTIPLICATIVE;
+                GlobalSettings.Instance.DiscountType = DiscountType.MULTIPLICATIVE;
 
             productDatabase.UpdatePrices();
         }

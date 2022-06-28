@@ -105,7 +105,7 @@
 
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="20">
-            <ListBox FontSize="14" Height="300" Width="150" ItemsSource="{Binding SelectedProductPrice.PriceDetails.AdditionalExpenses}" SelectedItem="{Binding SelectedAdditionalExpense}">
+            <ListBox FontSize="14" Height="300" Width="150" ItemsSource="{Binding SelectedProductPrice.ProductSettings.AdditionalExpenses}" SelectedItem="{Binding RemoveAdditionalExpenseCommand.SelectedExpense}">
 
         </ListBox>
         <Button Margin="20" x:Name="DeleteButton" Width="90" Height="30" Content="Obriši" Command="{Binding RemoveAdditionalExpenseCommand}"></Button>

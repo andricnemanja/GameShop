@@ -13,7 +13,7 @@ namespace GameShop.Calculators
 
         public DiscountCalculator(double discount)
         {
-            Discount = 0;
+            Discount = discount;
         }
 
         public double Calculate(ProductPrice productPrice)

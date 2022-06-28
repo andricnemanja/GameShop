@@ -9,27 +9,20 @@ namespace GameShop.Settings
     public class AdditionalExpense
     {
         public string Name { get; set; }
+        public double PricePercentage { get; set; }
+        public double FixedAmount { get; set; }
 
-        private double _pricePercentage;
-        public double PricePercentage
+        public AdditionalExpense(string name, double pricePercentage, double fixedAmount)
         {
-            get { return _pricePercentage; }
-            set 
-            { 
-                _pricePercentage = value;
-                _fixedAmount = 0;
-            }
+            Name = name;
+            PricePercentage = pricePercentage;
+            FixedAmount = fixedAmount;
         }
 
-        private double _fixedAmount;
-        public double FixedAmount
+
+        public override string ToString()
         {
-            get { return _fixedAmount; }
-            set 
-            { 
-                _fixedAmount = value;
-                _pricePercentage = 0;
-            }
+            return Name + " " + ((PricePercentage != 0) ? PricePercentage + "%" : FixedAmount + "RSD");
         }
     }
 }

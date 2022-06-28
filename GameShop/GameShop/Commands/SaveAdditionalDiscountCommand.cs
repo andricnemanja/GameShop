@@ -33,24 +33,10 @@ namespace GameShop.Commands
 
         public void Execute(object parameter)
         {
-            ICalculator calculator;
-            if (DiscountBeforeTax)
-                calculator = new AdditionalDiscountBeforeTaxCalculator(DiscountPercentage);
-            else
-                calculator = new AdditionalDiscountCalculator(DiscountPercentage);
+            selectedProductPrice.ProductSettings.AdditionalDiscoubtBeforeTax = DiscountBeforeTax;
+            selectedProductPrice.ProductSettings.AdditionalDiscount = DiscountPercentage;
+            selectedProductPrice.CalculateFinalPrice();
 
-            for(int i = 0;  i < selectedProductPrice.Calculators.Count; i++)
-            {
-                if(selectedProductPrice.Calculators[i] is AdditionalDiscountBeforeTaxCalculator ||
-                    selectedProductPrice.Calculators[i] is AdditionalDiscountCalculator)
-                {
-                    selectedProductPrice.Calculators[i] = calculator;
-                    selectedProductPrice.CalculateFinalPrice();
-                    additionalDiscountWindow.Close();
-                    return;
-                }
-            }
-            selectedProductPrice.AddCalculator(calculator);
             additionalDiscountWindow.Close();
 
 

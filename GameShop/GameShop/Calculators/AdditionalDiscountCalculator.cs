@@ -1,4 +1,5 @@
 ﻿using GameShop.Model;
+using GameShop.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace GameShop.Calculators
         public double Calculate(ProductPrice productPrice)
         {
             // Calculators[0] is TaxCalculator, Calculator[1] is DiscountCalculator
-            if (DiscountCalculationMethod.Instance.DiscountType == DiscountType.ADDITIVE)
+            if (GlobalSettings.Instance.DiscountType == DiscountType.ADDITIVE)
                 return -productPrice.Product.Price * Percentage / 100;
 
             double priceWithRegularDiscount = productPrice.Product.Price + productPrice.Calculators[1].Calculate(productPrice);

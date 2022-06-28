@@ -1,5 +1,6 @@
 ﻿using GameShop.Calculators;
 using GameShop.Model;
+using GameShop.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace GameShop.Commands
         public event EventHandler CanExecuteChanged;
 
         public ProductPrice SelectedProductPrice { get; set; }
-        public AdditionalExpenseCalculator SelectedExpense { get; set; }
+        public AdditionalExpense SelectedExpense { get; set; }
 
         public RemoveAdditionalExpenseCommand(ProductPrice selectedProductPrice)
         {
@@ -28,7 +29,7 @@ namespace GameShop.Commands
 
         public void Execute(object parameter)
         {
-            SelectedProductPrice.Calculators.Remove(SelectedExpense);
+            SelectedProductPrice.ProductSettings.AdditionalExpenses.Remove(SelectedExpense) ;
             SelectedProductPrice.CalculateFinalPrice();
         }
     }

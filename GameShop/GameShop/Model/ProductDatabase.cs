@@ -60,8 +60,6 @@ namespace GameShop
             foreach(Product product in Products)
             {
                 ProductPrice productPrice = new ProductPrice(product);
-                productPrice.Calculators.Add(TaxCalculator.Instance);
-                productPrice.Calculators.Add(DiscountCalculator.Instance);
                 ProductPricesList.Add(productPrice);
             }
         }

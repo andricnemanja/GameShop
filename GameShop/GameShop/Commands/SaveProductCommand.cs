@@ -37,9 +37,7 @@ namespace GameShop.Commands
                 Price = Price,
                 UPC = UPC
             };
-            ProductPrice productPrice = new ProductPrice(newProduct);
-            productPrice.Calculators.Add(TaxCalculator.Instance);
-            productPrice.Calculators.Add(DiscountCalculator.Instance);
+            ProductPrice productPrice = new ProductPrice(newProduct);       
             productDatabase.ProductPricesList.Add(productPrice);
             ProductDatabase.Products.Add(newProduct);
         }
