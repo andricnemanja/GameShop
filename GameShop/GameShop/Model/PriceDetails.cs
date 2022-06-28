@@ -55,8 +55,6 @@ namespace GameShop.Model
             }
         }
 
-        public ObservableCollection<AdditionalExpenseCalculator> AdditionalExpenses { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public PriceDetails(ProductPrice productPrice)
@@ -65,7 +63,6 @@ namespace GameShop.Model
             TaxAmount = 0;
             DiscountAmount = 0;
             ExpensesAmount = 0;
-            AdditionalExpenses = new ObservableCollection<AdditionalExpenseCalculator>();
         }
 
         public void CalculatePriceDetails(ICalculator calculator)
@@ -80,7 +77,6 @@ namespace GameShop.Model
             else if(calculator is AdditionalExpenseCalculator)
             {
                 ExpensesAmount += calculator.Calculate(productPrice);
-                AdditionalExpenses.Add(calculator as AdditionalExpenseCalculator);
             }
         }
 
@@ -89,7 +85,6 @@ namespace GameShop.Model
             TaxAmount = 0;
             DiscountAmount = 0;
             ExpensesAmount = 0;
-            AdditionalExpenses.Clear();
         }
 
         private void RaisePropertyChanged(string property)
