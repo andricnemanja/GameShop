@@ -51,8 +51,7 @@ namespace GameShop.Model
 
             foreach (ICalculator calculator in Calculators)
             {
-                FinalPrice += calculator.Calculate(this);
-                PriceDetails.CalculatePriceDetails(calculator);
+                calculator.Calculate(this);
             }
 
             return FinalPrice;

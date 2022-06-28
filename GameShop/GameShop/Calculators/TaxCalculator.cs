@@ -16,9 +16,11 @@ namespace GameShop.Calculators
             Tax = tax;
         }
 
-        public double Calculate(ProductPrice productPrice)
+        public void Calculate(ProductPrice productPrice)
         {
-            return productPrice.Product.Price * Tax / 100;
+            double tax = productPrice.Product.Price * Tax / 100;
+            productPrice.FinalPrice += tax;
+            productPrice.PriceDetails.TaxAmount += tax;
         }
     }
 }

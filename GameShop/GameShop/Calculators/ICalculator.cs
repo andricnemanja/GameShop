@@ -9,6 +9,6 @@ namespace GameShop.Calculators
 {
     public interface ICalculator
     {
-        public double Calculate(ProductPrice productPrice);
+        public void Calculate(ProductPrice productPrice);
     }
 }

@@ -16,14 +16,23 @@ namespace GameShop.Calculators
             Percentage = percentage;
         }
 
-        public double Calculate(ProductPrice productPrice)
+        public void Calculate(ProductPrice productPrice)
         {
-            // Calculators[0] is TaxCalculator, Calculator[1] is DiscountCalculator
-            if (GlobalSettings.Instance.DiscountType == DiscountType.ADDITIVE)
-                return -productPrice.Product.Price * Percentage / 100;
+            double discount;
 
-            double priceWithRegularDiscount = productPrice.Product.Price + productPrice.Calculators[1].Calculate(productPrice);
-            return -priceWithRegularDiscount * Percentage / 100;
+            if (GlobalSettings.Instance.DiscountType == DiscountType.ADDITIVE)
+            {
+                discount = -productPrice.Product.Price * Percentage / 100;
+            }
+            else
+            {
+                double regularDiscount = -productPrice.Product.Price * GlobalSettings.Instance.Discount / 100;
+                discount = -(productPrice.Product.Price + regularDiscount) * Percentage / 100;
+            }
+            
+            productPrice.FinalPrice += discount;
+            productPrice.PriceDetails.DiscountAmount += discount;
+                 
         }
     }
 }

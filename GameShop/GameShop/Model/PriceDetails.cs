@@ -65,21 +65,6 @@ namespace GameShop.Model
             ExpensesAmount = 0;
         }
 
-        public void CalculatePriceDetails(ICalculator calculator)
-        {
-            if(calculator is TaxCalculator)   
-                TaxAmount += calculator.Calculate(productPrice);
-            else if (calculator is DiscountCalculator || calculator is AdditionalDiscountCalculator
-                || calculator is AdditionalDiscountBeforeTaxCalculator)
-            {
-                DiscountAmount += calculator.Calculate(productPrice);
-            }
-            else if(calculator is AdditionalExpenseCalculator)
-            {
-                ExpensesAmount += calculator.Calculate(productPrice);
-            }
-        }
-
         public void Reset()
         {
             TaxAmount = 0;

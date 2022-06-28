@@ -16,16 +16,20 @@ namespace GameShop.Calculators
         {
             Percentage = percentage;
         }
-        public double Calculate(ProductPrice productPrice)
+        public void Calculate(ProductPrice productPrice)
         {
-            // Calculators[0] is TaxCalculator, Calculator[1] is DiscountCalculator
+            double taxAmount = productPrice.Product.Price * GlobalSettings.Instance.Tax / 100;
+            double regularDiscount = -productPrice.Product.Price * GlobalSettings.Instance.Discount / 100;
+            double additionalDiscount;
+
             if (GlobalSettings.Instance.DiscountType == DiscountType.ADDITIVE)
-                return -(productPrice.Product.Price + productPrice.Calculators[0].Calculate(productPrice)) * Percentage / 100;
+                additionalDiscount = -(productPrice.Product.Price + taxAmount) * Percentage / 100;
+            else
+                additionalDiscount = -(productPrice.Product.Price + taxAmount + regularDiscount) * Percentage / 100;
 
-            double tax = productPrice.Calculators[0].Calculate(productPrice);
-            double regularDiscount = productPrice.Calculators[1].Calculate(productPrice);
 
-            return -(productPrice.Product.Price + tax + regularDiscount) * Percentage / 100;
+            productPrice.FinalPrice += additionalDiscount;
+            productPrice.PriceDetails.DiscountAmount += additionalDiscount;
         }
     }
 }

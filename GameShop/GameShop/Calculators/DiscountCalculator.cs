@@ -16,9 +16,11 @@ namespace GameShop.Calculators
             Discount = discount;
         }
 
-        public double Calculate(ProductPrice productPrice)
+        public void Calculate(ProductPrice productPrice)
         {
-            return -productPrice.Product.Price * Discount / 100;
+            double discount = -productPrice.Product.Price * Discount / 100;
+            productPrice.FinalPrice += discount;
+            productPrice.PriceDetails.DiscountAmount += discount;
         }
     }
 }

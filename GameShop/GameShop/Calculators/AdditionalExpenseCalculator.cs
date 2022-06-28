@@ -20,14 +20,11 @@ namespace GameShop.Calculators
             Amount = amount;
         }
 
-        public double Calculate(ProductPrice productPrice)
+        public void Calculate(ProductPrice productPrice)
         {
-            return productPrice.Product.Price * PricePercentage / 100 + Amount;
-        }
-
-        public override string ToString()
-        {
-            return Name + " " + ((PricePercentage != 0) ? (PricePercentage + "%") : (Amount + "RSD"));
+            double expense = productPrice.Product.Price * PricePercentage / 100 + Amount;
+            productPrice.FinalPrice += expense;
+            productPrice.PriceDetails.ExpensesAmount += expense;
         }
     }
 }
