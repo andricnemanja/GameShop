@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using System.Windows.Controls;
 
 namespace GameShop.Validations
@@ -15,7 +10,7 @@ namespace GameShop.Validations
             string input = value as string;
             double number;
 
-            if(!double.TryParse(input, out number))
+            if (!double.TryParse(input, out number))
                 return new ValidationResult(false, "Popust mora biti broj");
 
             if (number < 0)

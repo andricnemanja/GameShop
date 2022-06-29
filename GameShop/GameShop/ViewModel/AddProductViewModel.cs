@@ -1,9 +1,5 @@
-﻿using GameShop.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameShop.Backend;
+using GameShop.Commands;
 using System.Windows.Input;
 
 namespace GameShop.ViewModel

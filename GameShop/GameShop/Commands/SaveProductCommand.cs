@@ -1,10 +1,6 @@
-﻿using GameShop.Calculators;
-using GameShop.Model;
+﻿using GameShop.Backend;
+using GameShop.Backend.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GameShop.Commands
@@ -37,7 +33,7 @@ namespace GameShop.Commands
                 Price = Price,
                 UPC = UPC
             };
-            ProductPrice productPrice = new ProductPrice(newProduct);       
+            ProductPrice productPrice = new ProductPrice(newProduct);
             productDatabase.ProductPricesList.Add(productPrice);
             ProductDatabase.Products.Add(newProduct);
         }

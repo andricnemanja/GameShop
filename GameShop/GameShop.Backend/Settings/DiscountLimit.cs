@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameShop.Settings
+﻿namespace GameShop.Backend.Settings
 {
     public class DiscountLimit
     {
@@ -14,10 +8,10 @@ namespace GameShop.Settings
         public double DiscountLimitPercentage
         {
             get { return _discountLimitPercentage; }
-            set 
-            { 
-                _discountLimitPercentage = value; 
-                if(value != 0)
+            set
+            {
+                _discountLimitPercentage = value;
+                if (value != 0)
                     IsPercentage = true;
                 else
                     IsPercentage = false;

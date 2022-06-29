@@ -1,11 +1,6 @@
-﻿using GameShop.Calculators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameShop.Backend.Calculators;
 
-namespace GameShop.Builder
+namespace GameShop.Backend.Builder
 {
     public class CalculatorsDirector
     {

@@ -1,13 +1,6 @@
-﻿using GameShop.Calculators;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace GameShop.Model
+namespace GameShop.Backend.Model
 {
     public class PriceDetails : INotifyPropertyChanged
     {
@@ -18,7 +11,7 @@ namespace GameShop.Model
         {
             get { return _taxAmount; }
             set
-            { 
+            {
                 if (_taxAmount != value)
                 {
                     _taxAmount = value;
@@ -31,8 +24,8 @@ namespace GameShop.Model
         public double DiscountAmount
         {
             get { return _discountAmount; }
-            set 
-            { 
+            set
+            {
                 if (_discountAmount != value)
                 {
                     _discountAmount = value;
@@ -45,7 +38,7 @@ namespace GameShop.Model
         public double ExpensesAmount
         {
             get { return _expensesAmount; }
-            set 
+            set
             {
                 if (_expensesAmount != value)
                 {

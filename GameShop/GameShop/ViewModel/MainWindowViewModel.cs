@@ -1,14 +1,9 @@
-﻿using GameShop.Calculators;
+﻿using GameShop.Backend;
+using GameShop.Backend.Model;
+using GameShop.Backend.Settings;
 using GameShop.Commands;
-using GameShop.Model;
-using GameShop.Settings;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GameShop
@@ -17,15 +12,15 @@ namespace GameShop
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private static string PRODUCTS_JSON = @".\..\..\..\Resources\products.json";
-        public ObservableCollection<ProductPrice> ProductPricesList{ get; set; }
+        public ObservableCollection<ProductPrice> ProductPricesList { get; set; }
         private ProductDatabase productDatabase;
 
         private ProductPrice _selectedProductPrice;
         public ProductPrice SelectedProductPrice
         {
             get { return _selectedProductPrice; }
-            set 
-            { 
+            set
+            {
                 _selectedProductPrice = value;
                 ((AddAdditionalDiscountCommand)AdditionalDiscountCommand).SelectedProductPrice = value;
                 ((AddAdditionalExpensesCommand)AdditionalExpenseCommand).SelectedProductPrice = value;
@@ -36,7 +31,7 @@ namespace GameShop
         public double Tax
         {
             get { return _tax; }
-            set 
+            set
             {
                 _tax = value;
                 if (_tax < 0)
@@ -48,7 +43,7 @@ namespace GameShop
                     GlobalSettings.Instance.Tax = _tax;
                     productDatabase.UpdatePrices();
                 }
-                
+
             }
         }
 
@@ -76,7 +71,7 @@ namespace GameShop
         public bool AdditiveDiscount
         {
             get { return _additiveDiscount; }
-            set 
+            set
             {
                 if (_additiveDiscount != value)
                 {
@@ -94,7 +89,7 @@ namespace GameShop
         public bool MultiplicativeDiscount
         {
             get { return _multiplicativeDiscount; }
-            set 
+            set
             {
                 if (_multiplicativeDiscount != value)
                 {

@@ -1,12 +1,7 @@
-﻿using GameShop.Model;
-using GameShop.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameShop.Backend.Model;
+using GameShop.Backend.Settings;
 
-namespace GameShop.Calculators
+namespace GameShop.Backend.Calculators
 {
     public class AdditionalDiscountCalculator : ICalculator
     {
@@ -31,10 +26,10 @@ namespace GameShop.Calculators
             }
 
             discount = DiscountLimitChecker.CheckDiscountLimit(productPrice, discount);
-            
+
             productPrice.FinalPrice -= discount;
             productPrice.PriceDetails.DiscountAmount += discount;
-                 
+
         }
     }
 }

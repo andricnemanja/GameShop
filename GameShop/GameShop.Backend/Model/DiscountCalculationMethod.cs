@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameShop.Model
+﻿namespace GameShop.Backend.Model
 {
     public class DiscountCalculationMethod
     {
@@ -18,10 +12,11 @@ namespace GameShop.Model
 
         public static DiscountCalculationMethod Instance
         {
-            get {
-                if( _instance == null )
+            get
+            {
+                if (_instance == null)
                     _instance = new DiscountCalculationMethod();
-                return _instance; ; 
+                return _instance; ;
             }
         }
 

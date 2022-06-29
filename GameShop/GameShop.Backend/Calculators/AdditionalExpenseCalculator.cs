@@ -1,11 +1,6 @@
-﻿using GameShop.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameShop.Backend.Model;
 
-namespace GameShop.Calculators
+namespace GameShop.Backend.Calculators
 {
     public class AdditionalExpenseCalculator : ICalculator
     {

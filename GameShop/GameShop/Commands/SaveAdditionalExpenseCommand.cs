@@ -1,11 +1,6 @@
-﻿using GameShop.Calculators;
-using GameShop.Model;
-using GameShop.Settings;
+﻿using GameShop.Backend.Model;
+using GameShop.Backend.Settings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GameShop.Commands

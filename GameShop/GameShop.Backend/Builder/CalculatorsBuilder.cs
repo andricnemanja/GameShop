@@ -1,16 +1,12 @@
-﻿using GameShop.Calculators;
-using GameShop.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameShop.Backend.Calculators;
+using GameShop.Backend.Settings;
+using GameShop.Calculators;
 
-namespace GameShop.Builder
+namespace GameShop.Backend.Builder
 {
     public class CalculatorsBuilder : ICalculatorsBuilder
     {
-        public List<ICalculator> Calculators{ get; set; }
+        public List<ICalculator> Calculators { get; set; }
         public ProductSettings ProductSettings { get; set; }
 
         public CalculatorsBuilder(ProductSettings productSettings)
@@ -42,7 +38,7 @@ namespace GameShop.Builder
 
         public void BuildAdditionalExpensesCalculator()
         {
-            foreach(AdditionalExpense additionalExpense in ProductSettings.AdditionalExpenses)
+            foreach (AdditionalExpense additionalExpense in ProductSettings.AdditionalExpenses)
             {
                 AdditionalExpenseCalculator calculator = new AdditionalExpenseCalculator(additionalExpense.Name,
                     additionalExpense.PricePercentage, additionalExpense.FixedAmount);

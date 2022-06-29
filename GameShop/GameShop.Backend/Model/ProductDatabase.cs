@@ -1,23 +1,15 @@
-﻿using GameShop.Calculators;
-using GameShop.Model;
-using System;
-using System.Collections.Generic;
+﻿using GameShop.Backend.Model;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace GameShop
+namespace GameShop.Backend
 {
     public class ProductDatabase
     {
         public static ObservableCollection<Product> Products { get; set; }
         public ObservableCollection<ProductPrice> ProductPricesList { get; set; }
         private string serializationFileName;
-        
+
         public ProductDatabase(string fileName)
         {
             Products = new();
@@ -38,7 +30,7 @@ namespace GameShop
 
         public static bool IsUPCUnique(int UPC)
         {
-            foreach(Product product in Products)
+            foreach (Product product in Products)
             {
                 if (product.UPC == UPC)
                     return false;
@@ -57,7 +49,7 @@ namespace GameShop
         {
             string jsonString = File.ReadAllText(serializationFileName);
             Products = JsonSerializer.Deserialize<ObservableCollection<Product>>(jsonString);
-            foreach(Product product in Products)
+            foreach (Product product in Products)
             {
                 ProductPrice productPrice = new ProductPrice(product);
                 ProductPricesList.Add(productPrice);

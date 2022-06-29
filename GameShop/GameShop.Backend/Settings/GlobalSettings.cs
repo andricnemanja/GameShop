@@ -1,11 +1,6 @@
-﻿using GameShop.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameShop.Backend.Model;
 
-namespace GameShop.Settings
+namespace GameShop.Backend.Settings
 {
     public class GlobalSettings
     {
@@ -13,9 +8,9 @@ namespace GameShop.Settings
 
         public static GlobalSettings Instance
         {
-            get 
-            { 
-                if( _instance == null )
+            get
+            {
+                if (_instance == null)
                     _instance = new GlobalSettings();
                 return _instance;
             }

@@ -1,14 +1,9 @@
-﻿using GameShop.Builder;
-using GameShop.Calculators;
-using GameShop.Settings;
-using System;
-using System.Collections.Generic;
+﻿using GameShop.Backend.Builder;
+using GameShop.Backend.Calculators;
+using GameShop.Backend.Settings;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GameShop.Model
+namespace GameShop.Backend.Model
 {
     public class ProductPrice : INotifyPropertyChanged
     {
@@ -21,8 +16,8 @@ namespace GameShop.Model
         public double FinalPrice
         {
             get { return _finalPrice; }
-            set 
-            { 
+            set
+            {
                 if (_finalPrice != value)
                 {
                     _finalPrice = value;

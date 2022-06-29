@@ -1,13 +1,7 @@
-﻿using GameShop.Commands;
-using GameShop.Settings;
-using System;
-using System.Collections.Generic;
+﻿using GameShop.Backend;
+using GameShop.Commands;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace GameShop.ViewModel
 {
@@ -18,15 +12,15 @@ namespace GameShop.ViewModel
         public double DiscountLimitPercentage
         {
             get { return _discountLimitPercentage; }
-            set 
-            { 
-                if( _discountLimitPercentage != value)
+            set
+            {
+                if (_discountLimitPercentage != value)
                 {
                     _discountLimitPercentage = value;
                     _discountLimitFixedAmount = 0;
                     RaisePropertyChanged("DiscountLimitFixedAmount");
                     UpdateDiscountLimitCommandProperties();
-                    
+
                 }
             }
         }
@@ -36,7 +30,7 @@ namespace GameShop.ViewModel
         public double DiscountLimitFixedAmount
         {
             get { return _discountLimitFixedAmount; }
-            set 
+            set
             {
                 if (_discountLimitFixedAmount != value)
                 {
@@ -59,7 +53,7 @@ namespace GameShop.ViewModel
         private void UpdateDiscountLimitCommandProperties()
         {
             SetDiscountLimitCommand.DiscountLimitFixedAmount = _discountLimitFixedAmount;
-            SetDiscountLimitCommand.DiscountLimitPercentage = _discountLimitPercentage; 
+            SetDiscountLimitCommand.DiscountLimitPercentage = _discountLimitPercentage;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

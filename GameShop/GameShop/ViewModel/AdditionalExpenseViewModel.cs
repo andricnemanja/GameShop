@@ -1,13 +1,6 @@
-﻿using GameShop.Calculators;
+﻿using GameShop.Backend.Model;
 using GameShop.Commands;
-using GameShop.Model;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace GameShop
 {
@@ -17,8 +10,8 @@ namespace GameShop
         public string AdditionalExpenseName
         {
             get { return _additionalExpenseName; }
-            set 
-            { 
+            set
+            {
                 _additionalExpenseName = value;
                 SaveAdditionalExpenseCommand.ExpenseName = value;
             }
@@ -28,7 +21,7 @@ namespace GameShop
         public double PricePercentage
         {
             get { return _pricePercentage; }
-            set 
+            set
             {
                 if (_pricePercentage != value)
                 {
@@ -46,8 +39,8 @@ namespace GameShop
         public double ExpenseAmount
         {
             get { return _expenseAmount; }
-            set 
-            { 
+            set
+            {
                 if (_expenseAmount != value)
                 {
                     _expenseAmount = value;
