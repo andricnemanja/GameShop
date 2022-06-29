@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameShop" xmlns:val="clr-namespace:GameShop.Validations"
         mc:Ignorable="d"
-        Title="Najveci dozvoljeni popust" Height="164" Width="366" WindowStartupLocation="CenterOwner">
+        Title="Najveci dozvoljeni popust" Height="171" Width="366" WindowStartupLocation="CenterOwner">
 
     <Grid HorizontalAlignment="Center">
         <Grid.RowDefinitions>
@@ -17,11 +17,11 @@
         </Grid.ColumnDefinitions>
                
 
-            <StackPanel Grid.Row="0" Orientation ="Horizontal" Margin="0,20,0,20">
+            <StackPanel Grid.Row="0" Orientation ="Horizontal" Margin="0,20,0,10">
                 <TextBlock Text="Procenat cene:" VerticalAlignment="Center" />
                 <TextBox x:Name="PricePercentage" Width="50" Height="20" Margin="10,0,0,0" >
                     <TextBox.Text>
-                    <Binding Path="SetDiscountLimitCommand.DiscountLimitPercentage" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{##.##}}">
+                    <Binding Path="DiscountLimitPercentage" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{##.##}}">
                             <Binding.ValidationRules>
                                 <val:TextBoxNotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
                                 <val:AdditionalDiscountValidationRule ValidatesOnTargetUpdated="True"/>
@@ -40,7 +40,7 @@
                 <TextBlock Text=" ili fiksni iznos:" VerticalAlignment="Center" Margin="10,0,0,0" />
                 <TextBox x:Name="ExpenseAmount" Width="70" Height="20" Margin="10,0,0,0">
                     <TextBox.Text>
-                    <Binding Path="SetDiscountLimitCommand.DiscountLimitFixedAmount" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{##.##}}">
+                    <Binding Path="DiscountLimitFixedAmount" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{##.##}}">
                             <Binding.ValidationRules>
                                 <val:TextBoxNotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
                                 <val:AdditionalDiscountValidationRule ValidatesOnTargetUpdated="True"/>

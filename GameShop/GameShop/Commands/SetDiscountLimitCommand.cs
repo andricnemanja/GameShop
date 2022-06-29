@@ -13,29 +13,9 @@ namespace GameShop.Commands
     {
         public event EventHandler CanExecuteChanged;
 
-        private double _discountLimitPercentage;
+        public double DiscountLimitPercentage { get; set; }
 
-        public double DiscountLimitPercentage
-        {
-            get { return _discountLimitPercentage; }
-            set 
-            { 
-                _discountLimitPercentage = value; 
-                _discountLimitFixedAmount = 0;
-            }
-        }
-
-        private double _discountLimitFixedAmount;
-
-        public double DiscountLimitFixedAmount
-        {
-            get { return _discountLimitFixedAmount; }
-            set 
-            { 
-                _discountLimitFixedAmount = value;
-                _discountLimitPercentage = 0;
-            }
-        }
+        public double DiscountLimitFixedAmount { get; set; }
 
         private Window discountLimitWindow;
 
@@ -54,7 +34,7 @@ namespace GameShop.Commands
 
         public void Execute(object parameter)
         {
-            GlobalSettings.Instance.DiscountLimit = new DiscountLimit(_discountLimitPercentage, _discountLimitFixedAmount);
+            GlobalSettings.Instance.DiscountLimit = new DiscountLimit(DiscountLimitPercentage, DiscountLimitFixedAmount);
             productDatabase.UpdatePrices();
             discountLimitWindow.Close();
         }
