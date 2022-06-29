@@ -37,6 +37,8 @@
             <MenuItem Header="Opcije">
                 <MenuItem Header="Aditivni popust" IsCheckable="True" IsChecked="{Binding AdditiveDiscount}" />
                 <MenuItem Header="Multiplikativni" IsCheckable="True" IsChecked="{Binding MultiplicativeDiscount}" />
+                <Separator />
+                <MenuItem Header="Maksimalni popust" Command="{Binding DiscountLimitCommand}" />
             </MenuItem>
         </Menu>
 

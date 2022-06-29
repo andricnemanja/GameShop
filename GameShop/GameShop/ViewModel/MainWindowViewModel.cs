@@ -115,6 +115,7 @@ namespace GameShop
         public BaseCommand RemoveProductCommand { get; set; }
         public ICommand AdditionalDiscountCommand { get; set; }
         public ICommand AdditionalExpenseCommand { get; set; }
+        public ICommand DiscountLimitCommand { get; set; }
 
 
         public MainWindowViewModel()
@@ -127,6 +128,7 @@ namespace GameShop
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);
             AdditionalDiscountCommand = new AddAdditionalDiscountCommand();
             AdditionalExpenseCommand = new AddAdditionalExpensesCommand();
+            DiscountLimitCommand = new DiscountLimitCommand(productDatabase);
         }
 
         private void ChangeDiscountType()

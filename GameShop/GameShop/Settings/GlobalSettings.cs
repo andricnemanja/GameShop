@@ -24,10 +24,12 @@ namespace GameShop.Settings
         public double Tax { get; set; }
         public double Discount { get; set; }
         public DiscountType DiscountType { get; set; }
+        public DiscountLimit DiscountLimit { get; set; }
+
 
         private GlobalSettings()
         {
-
+            DiscountLimit = new DiscountLimit(0, 0);
         }
     }
 }

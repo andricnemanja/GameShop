@@ -1,4 +1,5 @@
 ﻿using GameShop.Model;
+using GameShop.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,11 @@ namespace GameShop.Calculators
 
         public void Calculate(ProductPrice productPrice)
         {
-            double discount = -productPrice.Product.Price * Discount / 100;
-            productPrice.FinalPrice += discount;
+            double discount = productPrice.Product.Price * Discount / 100;
+
+            discount = DiscountLimitChecker.CheckDiscountLimit(productPrice, discount);
+
+            productPrice.FinalPrice -= discount;
             productPrice.PriceDetails.DiscountAmount += discount;
         }
     }

@@ -22,15 +22,17 @@ namespace GameShop.Calculators
 
             if (GlobalSettings.Instance.DiscountType == DiscountType.ADDITIVE)
             {
-                discount = -productPrice.Product.Price * Percentage / 100;
+                discount = productPrice.Product.Price * Percentage / 100;
             }
             else
             {
-                double regularDiscount = -productPrice.Product.Price * GlobalSettings.Instance.Discount / 100;
-                discount = -(productPrice.Product.Price + regularDiscount) * Percentage / 100;
+                double regularDiscount = productPrice.Product.Price * GlobalSettings.Instance.Discount / 100;
+                discount = (productPrice.Product.Price + regularDiscount) * Percentage / 100;
             }
+
+            discount = DiscountLimitChecker.CheckDiscountLimit(productPrice, discount);
             
-            productPrice.FinalPrice += discount;
+            productPrice.FinalPrice -= discount;
             productPrice.PriceDetails.DiscountAmount += discount;
                  
         }
