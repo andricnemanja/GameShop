@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameShop.Backend\GameShop.Backend.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="View\DiscountLimitWindow.xaml.cs">
