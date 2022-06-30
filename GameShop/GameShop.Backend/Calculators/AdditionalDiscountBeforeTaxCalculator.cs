@@ -2,7 +2,7 @@
 using GameShop.Backend.Model;
 using GameShop.Backend.Settings;
 
-namespace GameShop.Calculators
+namespace GameShop.Backend.Calculators
 {
     public class AdditionalDiscountBeforeTaxCalculator : ICalculator
     {

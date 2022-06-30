@@ -1,6 +1,5 @@
 ﻿using GameShop.Backend.Calculators;
 using GameShop.Backend.Settings;
-using GameShop.Calculators;
 
 namespace GameShop.Backend.Builder
 {

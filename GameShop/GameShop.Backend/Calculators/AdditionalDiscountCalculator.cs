@@ -22,7 +22,7 @@ namespace GameShop.Backend.Calculators
             else
             {
                 double regularDiscount = productPrice.Product.Price * GlobalSettings.Instance.Discount / 100;
-                discount = (productPrice.Product.Price + regularDiscount) * Percentage / 100;
+                discount = (productPrice.Product.Price - regularDiscount) * Percentage / 100;
             }
 
             discount = DiscountLimitChecker.CheckDiscountLimit(productPrice, discount);
