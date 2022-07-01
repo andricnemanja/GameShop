@@ -6,12 +6,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GameShop.UnitTests
 {
     [TestClass]
-    public class TaxCalculatorTests
+    public class DiscountCalculatorTests
     {
         [TestMethod]
-        public void CalculateTaxTest()
+        public void CalculateDiscountTest()
         {
             TaxCalculator taxCalculator = new TaxCalculator(21);
+            DiscountCalculator discountCalculator = new DiscountCalculator(15);
             Product product = new Product()
             {
                 Name = "Friends Forest House",
@@ -22,10 +23,10 @@ namespace GameShop.UnitTests
             PriceDetails priceDetails = new PriceDetails(productPrice);
             productPrice.PriceDetails = priceDetails;
 
-
             taxCalculator.Calculate(productPrice);
+            discountCalculator.Calculate(productPrice);
 
-            Assert.AreEqual(4.2525, productPrice.PriceDetails.TaxAmount);
+            Assert.AreEqual(3.0375, productPrice.PriceDetails.DiscountAmount);
         }
     }
 }
