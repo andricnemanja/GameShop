@@ -2,6 +2,7 @@
 using GameShop.Backend.Model;
 using GameShop.Backend.Settings;
 using GameShop.Commands;
+using GameShop.ViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -103,6 +104,7 @@ namespace GameShop
             }
         }
 
+        public CurrencyBinding CurrencyBinding { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -118,6 +120,7 @@ namespace GameShop
             productDatabase = new ProductDatabase(PRODUCTS_JSON);
             productDatabase.Deserialize();
             ProductPricesList = productDatabase.ProductPricesList;
+            CurrencyBinding = new CurrencyBinding();
 
             AddProductCommand = new AddProductCommand(productDatabase);
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);

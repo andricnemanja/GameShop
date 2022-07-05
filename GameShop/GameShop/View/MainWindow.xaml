@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameShop" xmlns:converters="clr-namespace:GameShop.Converters"
+        xmlns:settings="clr-namespace:GameShop.Backend.Settings;assembly=GameShop.Backend"
         mc:Ignorable="d"
         Title="Game Shop" Height="500" Width="920">
 
@@ -11,6 +12,7 @@
         <converters:DiscountAmountConverter x:Key="DiscountAmountConverter" />
         <converters:TaxAmountConverter x:Key="TaxAmountConverter" />
         <converters:ExpensesAmountConverter x:Key="ExpensesAmountConverter" />
+        <converters:CurrencyVisibilityConverter x:Key="CurrencyVisibilityConverter" />
     </Window.Resources>
     
     <Window.DataContext>
@@ -39,6 +41,14 @@
                 <MenuItem Header="Multiplikativni" IsCheckable="True" IsChecked="{Binding MultiplicativeDiscount}" />
                 <Separator />
                 <MenuItem Header="Maksimalni popust" Command="{Binding DiscountLimitCommand}" />
+                <MenuItem Header="Valuta">
+                    <MenuItem Header="RSD" IsCheckable="True" IsChecked="{Binding CurrencyBinding.RSD}"/>
+                    <MenuItem Header="EUR" IsCheckable="True" IsChecked="{Binding CurrencyBinding.EUR}"/>
+                    <MenuItem Header="USD" IsCheckable="True" IsChecked="{Binding CurrencyBinding.USD}"/>
+                    <MenuItem Header="GBP" IsCheckable="True" IsChecked="{Binding CurrencyBinding.GBP}"/>
+                    <MenuItem Header="JPY" IsCheckable="True" IsChecked="{Binding CurrencyBinding.JPY}"/>
+                    <MenuItem Header="CHF" IsCheckable="True" IsChecked="{Binding CurrencyBinding.CHF}"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
 
@@ -48,11 +58,53 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UPC" MinWidth="40" Binding="{Binding Product.UPC}" Width ="Auto" IsReadOnly="True" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Naziv proizvoda" Binding="{Binding Product.Name}" IsReadOnly="False" Width ="Auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Osnovna cena" Binding="{Binding Product.Price, StringFormat=N2}" Width ="*" IsReadOnly="False" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Iznos poreza" Binding="{Binding PriceDetails.TaxAmount, Converter={StaticResource TaxAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Ukupan popust" Binding="{Binding PriceDetails.DiscountAmount, Converter={StaticResource DiscountAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Dodatni troškovi" Binding="{Binding PriceDetails.ExpensesAmount, Converter={StaticResource ExpensesAmountConverter}, StringFormat=N2}" Width ="*" IsReadOnly="True" >
-                    <DataGridTextColumn.CellStyle>
+                <DataGridTemplateColumn Header="Osnovna cena" Width ="*" IsReadOnly="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Product.Price, StringFormat=N2}" />
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Source={x:Static settings:GlobalSettings.Instance}, Path=Currency}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Iznos poreza" Width ="*" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="TaxAmount" Text="{Binding PriceDetails.TaxAmount, Converter={StaticResource TaxAmountConverter}, StringFormat=N2}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Source={x:Static settings:GlobalSettings.Instance}, Path=Currency}" Visibility="{Binding PriceDetails.TaxAmount, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CurrencyVisibilityConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Ukupan popust" Width ="*" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding PriceDetails.DiscountAmount, Converter={StaticResource DiscountAmountConverter}, StringFormat=N2}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Source={x:Static settings:GlobalSettings.Instance}, Path=Currency}" Visibility="{Binding PriceDetails.DiscountAmount, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CurrencyVisibilityConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Dodatni troškovi" Width ="*" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding PriceDetails.ExpensesAmount, Converter={StaticResource ExpensesAmountConverter}, StringFormat=N2}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Source={x:Static settings:GlobalSettings.Instance}, Path=Currency}" Visibility="{Binding PriceDetails.ExpensesAmount, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CurrencyVisibilityConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="ToolTip">
                                 <Setter.Value>
@@ -61,11 +113,24 @@
                                 </Setter.Value>
                             </Setter>
                         </Style>
-                    </DataGridTextColumn.CellStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Konačna cena" Binding="{Binding FinalPrice, StringFormat=N2}" Width ="*" IsReadOnly="True" ></DataGridTextColumn>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Konačna cena" Width ="*" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding FinalPrice, StringFormat=N2}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Source={x:Static settings:GlobalSettings.Instance}, Path=Currency}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
+        
         <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="60,0,60,30">
             <Button Content="Dodaj proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding AddProductCommand}"/>
             <Button Content="Obriši proizvod" Width="100" Height="30" Margin="0,0,20,0" Command="{Binding RemoveProductCommand}"/>

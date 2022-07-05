@@ -16,7 +16,7 @@
 
         public override string ToString()
         {
-            return Name + " " + ((PricePercentage != 0) ? PricePercentage + "%" : FixedAmount + "RSD");
+            return Name + " " + ((PricePercentage != 0) ? PricePercentage + "%" : FixedAmount + GlobalSettings.Instance.Currency.ToString());
         }
     }
 }
