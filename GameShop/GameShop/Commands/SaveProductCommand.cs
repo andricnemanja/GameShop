@@ -36,6 +36,7 @@ namespace GameShop.Commands
             ProductPrice productPrice = new ProductPrice(newProduct);
             productDatabase.ProductPricesList.Add(productPrice);
             ProductDatabase.Products.Add(newProduct);
+            productDatabase.UpdatePrices();
         }
     }
 }
