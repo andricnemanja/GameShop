@@ -1,7 +1,7 @@
 {
-  "Currency": "EUR",
-  "Tax": 21,
-  "Discount": 7,
+  "Currency": "USD",
+  "Tax": 22,
+  "Discount": 10,
   "DiscountType": "MULTIPLICATIVE",
   "DiscountLimit": {
     "DiscountLimitPercentage": 0,

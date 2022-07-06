@@ -41,19 +41,14 @@ namespace GameShop.Backend
         public void Serialize()
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(Products, options);
+            string jsonString = JsonSerializer.Serialize(ProductPricesList, options);
             File.WriteAllText(serializationFileName, jsonString);
         }
 
         public void Deserialize()
         {
             string jsonString = File.ReadAllText(serializationFileName);
-            Products = JsonSerializer.Deserialize<ObservableCollection<Product>>(jsonString);
-            foreach (Product product in Products)
-            {
-                ProductPrice productPrice = new ProductPrice(product);
-                ProductPricesList.Add(productPrice);
-            }
+            ProductPricesList = JsonSerializer.Deserialize<ObservableCollection<ProductPrice>>(jsonString);
         }
     }
 }

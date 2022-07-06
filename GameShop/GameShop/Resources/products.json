@@ -1,17 +1,15 @@
 [
   {
-    "Name": "Fifa 2022",
-    "UPC": 1000,
-    "Price": 4999.99
-  },
-  {
-    "Name": "Pro Evolution Soccer 2022",
-    "UPC": 1001,
-    "Price": 3999.99
-  },
-  {
-    "Name": "Friends Forest House",
-    "UPC": 41679,
-    "Price": 20.25
+    "Product": {
+      "Name": "lego",
+      "UPC": 1234,
+      "Price": 1200
+    },
+    "ProductSettings": {
+      "AdditionalDiscoubtBeforeTax": false,
+      "AdditionalDiscount": 0,
+      "AdditionalExpenses": []
+    },
+    "FinalPrice": 1344
   }
 ]

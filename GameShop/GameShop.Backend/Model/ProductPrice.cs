@@ -2,14 +2,19 @@
 using GameShop.Backend.Calculators;
 using GameShop.Backend.Settings;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GameShop.Backend.Model
 {
     public class ProductPrice : INotifyPropertyChanged
     {
         public Product Product { get; set; }
+
+        [JsonIgnore]
         public PriceDetails PriceDetails { get; set; }
         public ProductSettings ProductSettings { get; set; }
+
+        [JsonIgnore]
         public List<ICalculator> Calculators { get; set; }
 
         private double _finalPrice;
