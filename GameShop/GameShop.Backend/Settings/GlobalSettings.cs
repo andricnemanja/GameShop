@@ -1,5 +1,6 @@
 ﻿using GameShop.Backend.Model;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GameShop.Backend.Settings
 {
@@ -21,10 +22,15 @@ namespace GameShop.Backend.Settings
 
         public double Tax { get; set; }
         public double Discount { get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public DiscountType DiscountType { get; set; }
+
         public DiscountLimit DiscountLimit { get; set; }
+
         private Currency _currency;
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Currency Currency
         {
             get { return _currency; }

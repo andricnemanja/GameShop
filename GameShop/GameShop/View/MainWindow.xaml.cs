@@ -11,6 +11,9 @@ namespace GameShop
         public MainWindow()
         {
             InitializeComponent();
+            MainWindowViewModel viewModel = new MainWindowViewModel();
+            this.DataContext = viewModel;
+            Closing += viewModel.OnWindowClosing;
         }
 
         private void dataGrid_MouseDown(object sender, MouseButtonEventArgs e)

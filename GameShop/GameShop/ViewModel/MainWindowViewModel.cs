@@ -3,6 +3,7 @@ using GameShop.Backend.Model;
 using GameShop.Backend.Settings;
 using GameShop.Commands;
 using GameShop.ViewModel;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -13,8 +14,11 @@ namespace GameShop
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private static string PRODUCTS_JSON = @".\..\..\..\Resources\products.json";
+        private static string GLOBAL_SETTINGS_JSON = @".\..\..\..\Resources\settings.json";
+
         public ObservableCollection<ProductPrice> ProductPricesList { get; set; }
         private ProductDatabase productDatabase;
+        private GlobalSettingsDatabase globalSettingsDatabase;
 
         private ProductPrice _selectedProductPrice;
         public ProductPrice SelectedProductPrice
@@ -28,7 +32,7 @@ namespace GameShop
             }
         }
 
-        private double _tax = 20;
+        private double _tax;
         public double Tax
         {
             get { return _tax; }
@@ -48,7 +52,7 @@ namespace GameShop
             }
         }
 
-        private double _discount = 0;
+        private double _discount;
         public double Discount
         {
             get { return _discount; }
@@ -68,7 +72,7 @@ namespace GameShop
             }
         }
 
-        private bool _additiveDiscount = true;
+        private bool _additiveDiscount;
         public bool AdditiveDiscount
         {
             get { return _additiveDiscount; }
@@ -86,7 +90,7 @@ namespace GameShop
             }
         }
 
-        private bool _multiplicativeDiscount = false;
+        private bool _multiplicativeDiscount;
         public bool MultiplicativeDiscount
         {
             get { return _multiplicativeDiscount; }
@@ -114,19 +118,51 @@ namespace GameShop
         public ICommand AdditionalExpenseCommand { get; set; }
         public ICommand DiscountLimitCommand { get; set; }
 
-
         public MainWindowViewModel()
         {
             productDatabase = new ProductDatabase(PRODUCTS_JSON);
+            globalSettingsDatabase = new GlobalSettingsDatabase(GLOBAL_SETTINGS_JSON);
             productDatabase.Deserialize();
+            globalSettingsDatabase.Deserialize();
+            productDatabase.UpdatePrices();
             ProductPricesList = productDatabase.ProductPricesList;
             CurrencyBinding = new CurrencyBinding();
+            UpdateViewValues();
 
             AddProductCommand = new AddProductCommand(productDatabase);
             RemoveProductCommand = new BaseCommand(RemoveProductExecuteMethod);
             AdditionalDiscountCommand = new AddAdditionalDiscountCommand();
             AdditionalExpenseCommand = new AddAdditionalExpensesCommand();
             DiscountLimitCommand = new DiscountLimitCommand(productDatabase);
+        }
+
+        private void UpdateViewValues()
+        {
+            _tax = GlobalSettings.Instance.Tax;
+            _discount = GlobalSettings.Instance.Discount;
+            _additiveDiscount = (GlobalSettings.Instance.DiscountType == DiscountType.ADDITIVE) ? true : false;
+            _multiplicativeDiscount = (GlobalSettings.Instance.DiscountType == DiscountType.MULTIPLICATIVE) ? true : false;
+            switch (GlobalSettings.Instance.Currency)
+            {
+                case Currency.USD:
+                    CurrencyBinding.USD = true;
+                    break;
+                case Currency.EUR:
+                    CurrencyBinding.EUR = true;
+                    break;
+                case Currency.GBP:
+                    CurrencyBinding.GBP = true;
+                    break;
+                case Currency.CHF:
+                    CurrencyBinding.CHF = true;
+                    break;
+                case Currency.JPY:
+                    CurrencyBinding.JPY = true;
+                    break;
+                default:
+                    CurrencyBinding.RSD = true;
+                    break;
+            }
         }
 
         private void ChangeDiscountType()
@@ -151,5 +187,12 @@ namespace GameShop
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            productDatabase.Serialize();
+            globalSettingsDatabase.Serialize();
+        }
+
     }
 }
