@@ -39,7 +39,12 @@ namespace GameShop.Backend.Model
             GlobalSettings.Instance.Discount = GetDoubleFromJsonElement("Discount", root);
             GlobalSettings.Instance.Tax = GetDoubleFromJsonElement("Tax", root);
             GlobalSettings.Instance.Currency = GetEnumFromJsonElement<Currency>("Currency", root);
-            GlobalSettings.Instance.DiscountType = GetEnumFromJsonElement<DiscountType>("DiscountType", root); ;
+            GlobalSettings.Instance.DiscountType = GetEnumFromJsonElement<DiscountType>("DiscountType", root);
+
+            JsonElement discountLimit = root.GetProperty("DiscountLimit");
+
+            GlobalSettings.Instance.DiscountLimit.DiscountLimitPercentage = GetDoubleFromJsonElement("DiscountLimitPercentage", discountLimit);
+            GlobalSettings.Instance.DiscountLimit.DiscountLimitFixedAmount = GetDoubleFromJsonElement("DiscountLimitFixedAmount", discountLimit);
 
         }
 
